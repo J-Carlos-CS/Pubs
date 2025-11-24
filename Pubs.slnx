@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/Databases/" />
+  <Folder Name="/Databases/OLTP/">
+    <Project Path="Pubs/Pubs.sqlproj">
+      <Build />
+      <Deploy />
+    </Project>
+  </Folder>
+</Solution>

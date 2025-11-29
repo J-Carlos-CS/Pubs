@@ -60,6 +60,7 @@
     <Folder Include="Schema\Programmability" />
     <Folder Include="Scripts" />
     <Folder Include="Schema\Programmability\Stored Procedures" />
+    <Folder Include="Schema\Security\Schemas" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Schema\Tables\authors.sql" />

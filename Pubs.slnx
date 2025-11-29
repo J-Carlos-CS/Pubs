@@ -1,7 +1,7 @@
 <Solution>
   <Folder Name="/Databases/" />
   <Folder Name="/Databases/OLTP/">
-    <Project Path="Pubs/Pubs.sqlproj">
+    <Project Path="Pubs/Pubs.sqlproj" Id="ab82f4c2-8086-4c87-9cfb-7efe10ad1a75">
       <Build />
       <Deploy />
     </Project>

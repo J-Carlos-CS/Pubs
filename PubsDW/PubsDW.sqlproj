@@ -3,15 +3,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <Name>Pubs</Name>
+    <Name>PubsDW</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
-    <ProjectGuid>{ab82f4c2-8086-4c87-9cfb-7efe10ad1a75}</ProjectGuid>
-    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql160DatabaseSchemaProvider</DSP>
+    <ProjectGuid>{85cf1491-5eab-4400-a1f7-2030c0bd898e}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql170DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
-    <RootPath />
-    <RootNamespace>Pubs</RootNamespace>
-    <AssemblyName>Pubs</AssemblyName>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>PubsDW</RootNamespace>
+    <AssemblyName>PubsDW</AssemblyName>
     <ModelCollation>1033, CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
@@ -47,6 +48,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
     <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
     <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
   </PropertyGroup>
@@ -54,34 +56,5 @@
   <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
-    <Folder Include="Schema" />
-    <Folder Include="Schema\Tables" />
-    <Folder Include="Schema\Security" />
-    <Folder Include="Schema\Programmability" />
-    <Folder Include="Schema\Security\Schemas" />
-  </ItemGroup>
-  <ItemGroup>
-    <Build Include="Schema\Tables\authors.sql" />
-    <Build Include="Schema\Tables\titles.sql" />
-    <Build Include="Schema\Tables\titleauthor.sql" />
-    <Build Include="Schema\Tables\discounts.sql" />
-    <Build Include="Schema\Tables\employee.sql" />
-    <Build Include="Schema\Tables\jobs.sql" />
-    <Build Include="Schema\Tables\pub_info.sql" />
-    <Build Include="Schema\Tables\publishers.sql" />
-    <Build Include="Schema\Tables\roysched.sql" />
-    <Build Include="Schema\Tables\sales.sql" />
-    <Build Include="Schema\Tables\stores.sql" />
-    <Build Include="Schema\Programmability\byroyalty.sql" />
-    <Build Include="Schema\Programmability\GetDatabaseRowVersion.sql" />
-    <Build Include="Schema\Programmability\GetSalesChangeByRowVersion.sql" />
-    <Build Include="Schema\Programmability\GetStoresChangeByRowVersion.sql" />
-    <Build Include="Schema\Programmability\GetTitleChangeByRowVersion.sql" />
-    <Build Include="Schema\Programmability\reptq1.sql" />
-    <Build Include="Schema\Programmability\reptq2.sql" />
-    <Build Include="Schema\Programmability\reptq3.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Schema\Security\Schemas\dbo.sql" />
   </ItemGroup>
 </Project>

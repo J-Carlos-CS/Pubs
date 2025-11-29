@@ -1,0 +1,8 @@
+﻿CREATE TABLE [dbo].[discounts](
+	[discounttype] [varchar](40) NOT NULL,
+	[stor_id] [char](4) NULL,
+	[lowqty] [smallint] NULL,
+	[highqty] [smallint] NULL,
+	[discount] [decimal](4, 2) NOT NULL,
+	[RowVersion] [timestamp] NOT NULL
+) ON [PRIMARY]

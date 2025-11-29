@@ -9,8 +9,5 @@ Post-Deployment Script Template
                SELECT * FROM [$(TableName)]					
 --------------------------------------------------------------------------------------
 */
-:r .\authors.data.sql
-:r .\discounts.data.sql
-:r .\employee.data.sql
-:r .\jobs.data.sql
-:r .\Script1.sql
+
+:r .\pubsData.sql

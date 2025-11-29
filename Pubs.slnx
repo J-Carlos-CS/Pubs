@@ -12,4 +12,6 @@
       <Deploy />
     </Project>
   </Folder>
+  <Folder Name="/ETL/" />
+  <Folder Name="/OLAP/" />
 </Solution>

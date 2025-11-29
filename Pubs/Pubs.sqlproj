@@ -83,13 +83,9 @@
     <Build Include="Schema\Programmability\Stored Procedures\reptq3.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Scripts\authors.data.sql" />
-    <None Include="Scripts\discounts.data.sql" />
-    <None Include="Scripts\employee.data.sql" />
-    <None Include="Scripts\jobs.data.sql" />
-    <None Include="Scripts\Script1.sql" />
+    <PostDeploy Include="Scripts\Script.PostDeployment.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Scripts\Script.PostDeployment.sql" />
+    <None Include="Scripts\pubsData.sql" />
   </ItemGroup>
 </Project>

@@ -1,7 +1,7 @@
 ﻿PRINT 'Populating authors table';
 SET NOCOUNT ON;
 
-SET IDENTITY_INSERT dbo.authors ON;  
+SET IDENTITY_INSERT [dbo].[authors] ON;  
 
 INSERT INTO [dbo].[authors] ([au_id], [au_lname], [au_fname], [phone], [address], [city], [state], [zip], [contract]) VALUES (N'172-32-1176', N'White', N'Johnson', N'408 496-7223', N'10932 Bigge Rd.', N'Menlo Park', N'CA', N'94025', 1)
 GO
@@ -50,5 +50,4 @@ GO
 INSERT INTO [dbo].[authors] ([au_id], [au_lname], [au_fname], [phone], [address], [city], [state], [zip], [contract]) VALUES (N'998-72-3567', N'Ringer', N'Albert', N'801 826-0752', N'67 Seventh Av.', N'Salt Lake City', N'UT', N'84152', 1)
 GO
 
-
-SET IDENTITY_INSERT dbo.authors OFF;
+SET IDENTITY_INSERT [dbo].[authors] OFF;

@@ -58,12 +58,10 @@
     <Folder Include="Schema\Tables" />
     <Folder Include="Schema\Security" />
     <Folder Include="Schema\Programmability" />
-    <Folder Include="Schema\Security\Schemas" />
     <Folder Include="Scripts" />
     <Folder Include="Schema\Programmability\Stored Procedures" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="Schema\Security\Schemas\dbo.sql" />
     <Build Include="Schema\Tables\authors.sql" />
     <Build Include="Schema\Tables\titles.sql" />
     <Build Include="Schema\Tables\titleauthor.sql" />
@@ -86,9 +84,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\authors.data.sql" />
-    <PostDeploy Include="Scripts\Script.PostDeployment.sql" />
     <None Include="Scripts\discounts.data.sql" />
     <None Include="Scripts\employee.data.sql" />
     <None Include="Scripts\jobs.data.sql" />
+    <None Include="Scripts\Script1.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Scripts\Script.PostDeployment.sql" />
   </ItemGroup>
 </Project>

@@ -61,5 +61,39 @@
     <Folder Include="Schema\Programmability" />
     <Folder Include="Schema\Security" />
     <Folder Include="Schema\Tables" />
+    <Folder Include="Schema\Tables\dbo" />
+    <Folder Include="Schema\Tables\staging" />
+    <Folder Include="Schema\Security\schemas" />
+    <Folder Include="Schema\Programmability\Stored Procedures" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Schema\Tables\dbo\DimAuthors.sql" />
+    <Build Include="Schema\Tables\dbo\DimDate.sql" />
+    <Build Include="Schema\Tables\dbo\DimPublishers.sql" />
+    <Build Include="Schema\Tables\dbo\DimStores.sql" />
+    <Build Include="Schema\Tables\dbo\DimTitles.sql" />
+    <Build Include="Schema\Tables\dbo\FacSales.sql" />
+    <Build Include="Schema\Tables\dbo\PackageConfig.sql" />
+    <Build Include="Schema\Security\schemas\staging.sql" />
+    <Build Include="Schema\Tables\staging\staging.authors.sql" />
+    <Build Include="Schema\Tables\staging\staging.publishers.sql" />
+    <Build Include="Schema\Tables\staging\staging.stores.sql" />
+    <Build Include="Schema\Tables\staging\staging.titles.sql" />
+    <Build Include="Schema\Tables\staging\staging.sales.sql" />
+    <Build Include="Schema\Programmability\Stored Procedures\UpdateLastPackageRowVersion.sql" />
+    <Build Include="Schema\Programmability\Stored Procedures\GetLastPackageRowVersion.sql" />
+    <Build Include="Schema\Programmability\Stored Procedures\DW_MergeDimAuthors.sql" />
+    <Build Include="Schema\Programmability\Stored Procedures\DW_MergeDimPublishers.sql" />
+    <Build Include="Schema\Programmability\Stored Procedures\DW_MergeDimStores.sql" />
+    <Build Include="Schema\Programmability\Stored Procedures\DW_MergeDimTitles.sql" />
+    <Build Include="Schema\Programmability\Stored Procedures\DW_MergeFactSales.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Scripts\Script.PostDeployment.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Scripts\DimDate.data.sql" />
+    <None Include="Scripts\PackageConfig.data.sql" />
+    <None Include="Scripts\PatchDimDate.data.sql" />
   </ItemGroup>
 </Project>

@@ -59,8 +59,11 @@
     <Folder Include="Schema\Security" />
     <Folder Include="Schema\Programmability" />
     <Folder Include="Schema\Security\Schemas" />
+    <Folder Include="Scripts" />
+    <Folder Include="Schema\Programmability\Stored Procedures" />
   </ItemGroup>
   <ItemGroup>
+    <Build Include="Schema\Security\Schemas\dbo.sql" />
     <Build Include="Schema\Tables\authors.sql" />
     <Build Include="Schema\Tables\titles.sql" />
     <Build Include="Schema\Tables\titleauthor.sql" />
@@ -72,16 +75,20 @@
     <Build Include="Schema\Tables\roysched.sql" />
     <Build Include="Schema\Tables\sales.sql" />
     <Build Include="Schema\Tables\stores.sql" />
-    <Build Include="Schema\Programmability\byroyalty.sql" />
-    <Build Include="Schema\Programmability\GetDatabaseRowVersion.sql" />
-    <Build Include="Schema\Programmability\GetSalesChangeByRowVersion.sql" />
-    <Build Include="Schema\Programmability\GetStoresChangeByRowVersion.sql" />
-    <Build Include="Schema\Programmability\GetTitleChangeByRowVersion.sql" />
-    <Build Include="Schema\Programmability\reptq1.sql" />
-    <Build Include="Schema\Programmability\reptq2.sql" />
-    <Build Include="Schema\Programmability\reptq3.sql" />
+    <Build Include="Schema\Programmability\Stored Procedures\byroyalty.sql" />
+    <Build Include="Schema\Programmability\Stored Procedures\GetDatabaseRowVersion.sql" />
+    <Build Include="Schema\Programmability\Stored Procedures\GetSalesChangeByRowVersion.sql" />
+    <Build Include="Schema\Programmability\Stored Procedures\GetStoresChangeByRowVersion.sql" />
+    <Build Include="Schema\Programmability\Stored Procedures\GetTitleChangeByRowVersion.sql" />
+    <Build Include="Schema\Programmability\Stored Procedures\reptq1.sql" />
+    <Build Include="Schema\Programmability\Stored Procedures\reptq2.sql" />
+    <Build Include="Schema\Programmability\Stored Procedures\reptq3.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Schema\Security\Schemas\dbo.sql" />
+    <None Include="Scripts\authors.data.sql" />
+    <PostDeploy Include="Scripts\Script.PostDeployment.sql" />
+    <None Include="Scripts\discounts.data.sql" />
+    <None Include="Scripts\employee.data.sql" />
+    <None Include="Scripts\jobs.data.sql" />
   </ItemGroup>
 </Project>

@@ -6,3 +6,7 @@
 	[discount] [decimal](4, 2) NOT NULL,
 	[RowVersion] [timestamp] NOT NULL
 ) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[discounts]  WITH CHECK ADD FOREIGN KEY([stor_id])
+REFERENCES [dbo].[stores] ([stor_id])
+GO

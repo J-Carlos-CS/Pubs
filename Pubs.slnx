@@ -1,5 +1,11 @@
 <Solution>
   <Folder Name="/Databases/" />
+  <Folder Name="/Databases/DataWarehouse/">
+    <Project Path="PubsDW/PubsDW.sqlproj" Id="4a28105c-3076-46c5-b6a7-701c0af4254a">
+      <Build />
+      <Deploy />
+    </Project>
+  </Folder>
   <Folder Name="/Databases/OLTP/">
     <Project Path="Pubs/Pubs.sqlproj" Id="ab82f4c2-8086-4c87-9cfb-7efe10ad1a75">
       <Build />

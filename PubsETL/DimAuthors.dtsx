@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="DimAuthors"
   DTS:PackageType="5"
-  DTS:VersionBuild="19"
-  DTS:VersionGUID="{E3DD5D1D-5621-47F3-9817-5A83756F6855}">
+  DTS:VersionBuild="20"
+  DTS:VersionGUID="{2F4ACA55-307C-4DEB-BB81-BADD2F887302}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -159,7 +159,7 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">EXECUTE [dbo].[GetTitleChangeByRowVersion] @startRow = ?, @endRow = ?</property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">EXECUTE [dbo].[GetAuthorsChangeByRowVersion] @startRow = ?, @endRow = ?</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -195,113 +195,6 @@
                   refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output]"
                   name="OLE DB Source Output">
                   <outputColumns>
-                    <outputColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[title_id]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].ExternalColumns[title_id]"
-                      length="6"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[title_id]"
-                      name="title_id"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[title]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].ExternalColumns[title]"
-                      length="80"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[title]"
-                      name="title"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[type]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].ExternalColumns[type]"
-                      length="12"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[type]"
-                      name="type"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[price]"
-                      dataType="cy"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].ExternalColumns[price]"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[price]"
-                      name="price"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[advance]"
-                      dataType="cy"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].ExternalColumns[advance]"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[advance]"
-                      name="advance"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[royalty]"
-                      dataType="i4"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].ExternalColumns[royalty]"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[royalty]"
-                      name="royalty"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[ytd_sales]"
-                      dataType="i4"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].ExternalColumns[ytd_sales]"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[ytd_sales]"
-                      name="ytd_sales"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[notes]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].ExternalColumns[notes]"
-                      length="200"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[notes]"
-                      name="notes"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[pubdate]"
-                      dataType="dbTimeStamp"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].ExternalColumns[pubdate]"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[pubdate]"
-                      name="pubdate"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[au_ord]"
-                      dataType="ui1"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].ExternalColumns[au_ord]"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[au_ord]"
-                      name="au_ord"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[royaltyper]"
-                      dataType="i4"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].ExternalColumns[royaltyper]"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[royaltyper]"
-                      name="royaltyper"
-                      truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[au_id]"
                       codePage="1252"
@@ -400,78 +293,18 @@
                       name="contract"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[lorange]"
-                      dataType="i4"
+                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[RowVersion]"
+                      dataType="bytes"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].ExternalColumns[lorange]"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[lorange]"
-                      name="lorange"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[hirange]"
-                      dataType="i4"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].ExternalColumns[hirange]"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[hirange]"
-                      name="hirange"
+                      externalMetadataColumnId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].ExternalColumns[RowVersion]"
+                      length="8"
+                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[RowVersion]"
+                      name="RowVersion"
                       truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
-                    <externalMetadataColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].ExternalColumns[title_id]"
-                      codePage="1252"
-                      dataType="str"
-                      length="6"
-                      name="title_id" />
-                    <externalMetadataColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].ExternalColumns[title]"
-                      codePage="1252"
-                      dataType="str"
-                      length="80"
-                      name="title" />
-                    <externalMetadataColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].ExternalColumns[type]"
-                      codePage="1252"
-                      dataType="str"
-                      length="12"
-                      name="type" />
-                    <externalMetadataColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].ExternalColumns[price]"
-                      dataType="cy"
-                      name="price" />
-                    <externalMetadataColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].ExternalColumns[advance]"
-                      dataType="cy"
-                      name="advance" />
-                    <externalMetadataColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].ExternalColumns[royalty]"
-                      dataType="i4"
-                      name="royalty" />
-                    <externalMetadataColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].ExternalColumns[ytd_sales]"
-                      dataType="i4"
-                      name="ytd_sales" />
-                    <externalMetadataColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].ExternalColumns[notes]"
-                      codePage="1252"
-                      dataType="str"
-                      length="200"
-                      name="notes" />
-                    <externalMetadataColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].ExternalColumns[pubdate]"
-                      dataType="dbTimeStamp"
-                      name="pubdate" />
-                    <externalMetadataColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].ExternalColumns[au_ord]"
-                      dataType="ui1"
-                      name="au_ord" />
-                    <externalMetadataColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].ExternalColumns[royaltyper]"
-                      dataType="i4"
-                      name="royaltyper" />
                     <externalMetadataColumn
                       refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].ExternalColumns[au_id]"
                       codePage="1252"
@@ -525,13 +358,10 @@
                       dataType="bool"
                       name="contract" />
                     <externalMetadataColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].ExternalColumns[lorange]"
-                      dataType="i4"
-                      name="lorange" />
-                    <externalMetadataColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].ExternalColumns[hirange]"
-                      dataType="i4"
-                      name="hirange" />
+                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].ExternalColumns[RowVersion]"
+                      dataType="bytes"
+                      length="8"
+                      name="RowVersion" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -539,69 +369,6 @@
                   isErrorOut="true"
                   name="OLE DB Source Error Output">
                   <outputColumns>
-                    <outputColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output].Columns[title_id]"
-                      codePage="1252"
-                      dataType="str"
-                      length="6"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output].Columns[title_id]"
-                      name="title_id" />
-                    <outputColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output].Columns[title]"
-                      codePage="1252"
-                      dataType="str"
-                      length="80"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output].Columns[title]"
-                      name="title" />
-                    <outputColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output].Columns[type]"
-                      codePage="1252"
-                      dataType="str"
-                      length="12"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output].Columns[type]"
-                      name="type" />
-                    <outputColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output].Columns[price]"
-                      dataType="cy"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output].Columns[price]"
-                      name="price" />
-                    <outputColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output].Columns[advance]"
-                      dataType="cy"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output].Columns[advance]"
-                      name="advance" />
-                    <outputColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output].Columns[royalty]"
-                      dataType="i4"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output].Columns[royalty]"
-                      name="royalty" />
-                    <outputColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output].Columns[ytd_sales]"
-                      dataType="i4"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output].Columns[ytd_sales]"
-                      name="ytd_sales" />
-                    <outputColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output].Columns[notes]"
-                      codePage="1252"
-                      dataType="str"
-                      length="200"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output].Columns[notes]"
-                      name="notes" />
-                    <outputColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output].Columns[pubdate]"
-                      dataType="dbTimeStamp"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output].Columns[pubdate]"
-                      name="pubdate" />
-                    <outputColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output].Columns[au_ord]"
-                      dataType="ui1"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output].Columns[au_ord]"
-                      name="au_ord" />
-                    <outputColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output].Columns[royaltyper]"
-                      dataType="i4"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output].Columns[royaltyper]"
-                      name="royaltyper" />
                     <outputColumn
                       refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output].Columns[au_id]"
                       codePage="1252"
@@ -664,15 +431,11 @@
                       lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output].Columns[contract]"
                       name="contract" />
                     <outputColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output].Columns[lorange]"
-                      dataType="i4"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output].Columns[lorange]"
-                      name="lorange" />
-                    <outputColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output].Columns[hirange]"
-                      dataType="i4"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output].Columns[hirange]"
-                      name="hirange" />
+                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output].Columns[RowVersion]"
+                      dataType="bytes"
+                      length="8"
+                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output].Columns[RowVersion]"
+                      name="RowVersion" />
                     <outputColumn
                       refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       dataType="i4"

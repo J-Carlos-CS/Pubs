@@ -83,6 +83,8 @@
     <Build Include="Schema\Programmability\Stored Procedures\reptq2.sql" />
     <Build Include="Schema\Programmability\Stored Procedures\reptq3.sql" />
     <Build Include="Schema\Programmability\Stored Procedures\GetAuthorsChangeByRowVersion.sql" />
+    <Build Include="Schema\Programmability\Stored Procedures\GetPublisherChangeByRowVersion.sql" />
+    <Build Include="Schema\Programmability\Stored Procedures\GetAllTitlesChangeByRowVersion.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Script.PostDeployment.sql" />

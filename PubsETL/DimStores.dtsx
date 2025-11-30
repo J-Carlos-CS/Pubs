@@ -1,50 +1,50 @@
 ﻿<?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
-  DTS:CreationDate="11/29/2025 4:42:29 PM"
+  DTS:CreationDate="11/29/2025 9:57:33 PM"
   DTS:CreationName="Microsoft.Package"
   DTS:CreatorComputerName="CARLOS"
   DTS:CreatorName="CARLOS\carlo"
-  DTS:DTSID="{68EB1964-6A07-4D07-A810-5956219F8E98}"
+  DTS:DTSID="{7E802C7E-B419-41E3-810A-96C5EED0161F}"
   DTS:ExecutableType="Microsoft.Package"
   DTS:LastModifiedProductVersion="17.0.1008.3"
   DTS:LocaleID="1033"
-  DTS:ObjectName="DimAuthors"
+  DTS:ObjectName="DimStores"
   DTS:PackageType="5"
-  DTS:VersionBuild="39"
-  DTS:VersionGUID="{7DD3BF0B-54E1-4B60-ADEA-03C77540C775}">
+  DTS:VersionBuild="17"
+  DTS:VersionGUID="{CA24C580-D4D1-49B1-95A7-C7A6D5A0B545}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
     <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[Destination.PubsDW]"
+      DTS:refId="Package.ConnectionManagers[Detination.PubsDW]"
       DTS:CreationName="OLEDB"
-      DTS:DTSID="{B1389C55-40AE-4EA7-A41A-ED77911623A0}"
-      DTS:ObjectName="Destination.PubsDW">
+      DTS:DTSID="{4C8EB541-27F0-488E-BDE7-92C7F9397D7B}"
+      DTS:ObjectName="Detination.PubsDW">
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=PubsDW;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-DimAuthors-{B1389C55-40AE-4EA7-A41A-ED77911623A0}(localdb)\MSSQLLocalDB.PubsDW;Auto Translate=False;" />
+          DTS:ConnectionString="Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=PubsDW;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-DimStores-{4C8EB541-27F0-488E-BDE7-92C7F9397D7B}(localdb)\MSSQLLocalDB.PubsDW;Auto Translate=False;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[Source.Pubs]"
       DTS:CreationName="OLEDB"
-      DTS:DTSID="{53A2D6CC-8185-4F04-9667-0103ECD7AC8A}"
+      DTS:DTSID="{8671CE53-D1C6-48F3-9D7A-84145C0F08D7}"
       DTS:ObjectName="Source.Pubs">
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Pubs;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-DimAuthors-{53A2D6CC-8185-4F04-9667-0103ECD7AC8A}(localdb)\MSSQLLocalDB.Pubs;Auto Translate=False;" />
+          DTS:ConnectionString="Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Pubs;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-DimStores-{8671CE53-D1C6-48F3-9D7A-84145C0F08D7}(localdb)\MSSQLLocalDB.Pubs;Auto Translate=False;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
   <DTS:Variables>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{E4AE73E6-14B8-4B05-87DC-84588CE7D251}"
+      DTS:DTSID="{53FA1388-B226-404B-A76E-731BB457A4BD}"
       DTS:IncludeInDebugDump="6789"
       DTS:Namespace="User"
       DTS:ObjectName="dbts">
@@ -53,7 +53,7 @@
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{D3103922-B433-4207-A947-4E80EF2041D5}"
+      DTS:DTSID="{02654529-7108-47AC-9AF7-3AFABB97E009}"
       DTS:IncludeInDebugDump="6789"
       DTS:Namespace="User"
       DTS:ObjectName="lastRowVersion">
@@ -66,7 +66,7 @@
       DTS:refId="Package\Clean-Up Staging"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
-      DTS:DTSID="{CF6D3193-1EA2-4B03-BA40-D853306307F0}"
+      DTS:DTSID="{21357CDF-34FA-4E0A-9082-99AE768CDAEB}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="Clean-Up Staging"
@@ -74,15 +74,15 @@
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{B1389C55-40AE-4EA7-A41A-ED77911623A0}"
-          SQLTask:SqlStatementSource="TRUNCATE TABLE staging.authors" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:Connection="{4C8EB541-27F0-488E-BDE7-92C7F9397D7B}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE staging.stores" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
       DTS:refId="Package\Get Database RowVersion"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
-      DTS:DTSID="{663B2F9E-3943-4EDB-92C1-03E4A243D3B8}"
+      DTS:DTSID="{CF821AC9-C50F-4328-A0B7-E5A4A2953B92}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="Get Database RowVersion"
@@ -90,7 +90,7 @@
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{53A2D6CC-8185-4F04-9667-0103ECD7AC8A}"
+          SQLTask:Connection="{8671CE53-D1C6-48F3-9D7A-84145C0F08D7}"
           SQLTask:SqlStatementSource="Execute [dbo].[GetDatabaseRowVersion]"
           SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
           <SQLTask:ResultBinding
@@ -103,7 +103,7 @@
       DTS:refId="Package\Get Last RowVersion"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
-      DTS:DTSID="{5FC7B8B1-82B2-448F-BD94-77E226DD8C41}"
+      DTS:DTSID="{D1E4F65B-9D55-4143-92B9-710371BF0005}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="Get Last RowVersion"
@@ -111,8 +111,8 @@
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{B1389C55-40AE-4EA7-A41A-ED77911623A0}"
-          SQLTask:SqlStatementSource="Execute [dbo].[GetLastPackageRowVersion] @tableName = 'Authors'"
+          SQLTask:Connection="{4C8EB541-27F0-488E-BDE7-92C7F9397D7B}"
+          SQLTask:SqlStatementSource="Execute [dbo].[GetLastPackageRowVersion] @tableName = 'Stores'"
           SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
           <SQLTask:ResultBinding
             SQLTask:ResultName="LastRowVersion"
@@ -121,13 +121,13 @@
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\Load Authors"
+      DTS:refId="Package\Load Stores"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Data Flow Task"
-      DTS:DTSID="{6ED41CF5-2FD9-48FA-A196-1D462CBDE1CE}"
+      DTS:DTSID="{5AF78D4F-CF9A-48C0-8DCA-44516B9C0B32}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
-      DTS:ObjectName="Load Authors"
+      DTS:ObjectName="Load Stores"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
       <DTS:ObjectData>
@@ -135,11 +135,11 @@
           version="1">
           <components>
             <component
-              refId="Package\Load Authors\Get Authors"
+              refId="Package\Load Stores\Get Stores"
               componentClassID="Microsoft.OLEDBSource"
               contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
               description="OLE DB Source"
-              name="Get Authors"
+              name="Get Stores"
               usesDispositions="true"
               version="7">
               <properties>
@@ -159,7 +159,7 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">EXECUTE [dbo].[GetAuthorsChangeByRowVersion] @startRow = ?, @endRow = ?</property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">EXECUTE [dbo].[GetStoresChangeByRowVersion] @startRow = ?, @endRow = ?</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -180,11 +180,11 @@
                 <property
                   dataType="System.String"
                   description="The mappings between the parameters in the SQL command and variables."
-                  name="ParameterMapping">"@startRow:Input",{D3103922-B433-4207-A947-4E80EF2041D5};"@endRow:Input",{E4AE73E6-14B8-4B05-87DC-84588CE7D251};</property>
+                  name="ParameterMapping">"@startRow:Input",{02654529-7108-47AC-9AF7-3AFABB97E009};"@endRow:Input",{53FA1388-B226-404B-A76E-731BB457A4BD};</property>
               </properties>
               <connections>
                 <connection
-                  refId="Package\Load Authors\Get Authors.Connections[OleDbConnection]"
+                  refId="Package\Load Stores\Get Stores.Connections[OleDbConnection]"
                   connectionManagerID="Package.ConnectionManagers[Source.Pubs]"
                   connectionManagerRefId="Package.ConnectionManagers[Source.Pubs]"
                   description="The OLE DB runtime connection used to access the database."
@@ -192,260 +192,257 @@
               </connections>
               <outputs>
                 <output
-                  refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output]"
+                  refId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output]"
                   name="OLE DB Source Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[au_id]"
+                      refId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].Columns[stor_id]"
                       codePage="1252"
                       dataType="str"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].ExternalColumns[au_id]"
-                      length="11"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[au_id]"
-                      name="au_id"
+                      externalMetadataColumnId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].ExternalColumns[stor_id]"
+                      length="4"
+                      lineageId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].Columns[stor_id]"
+                      name="stor_id"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[au_lname]"
+                      refId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].Columns[stor_name]"
                       codePage="1252"
                       dataType="str"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].ExternalColumns[au_lname]"
+                      externalMetadataColumnId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].ExternalColumns[stor_name]"
                       length="40"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[au_lname]"
-                      name="au_lname"
+                      lineageId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].Columns[stor_name]"
+                      name="stor_name"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[au_fname]"
+                      refId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].Columns[stor_address]"
                       codePage="1252"
                       dataType="str"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].ExternalColumns[au_fname]"
-                      length="20"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[au_fname]"
-                      name="au_fname"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[phone]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].ExternalColumns[phone]"
-                      length="12"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[phone]"
-                      name="phone"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[address]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].ExternalColumns[address]"
+                      externalMetadataColumnId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].ExternalColumns[stor_address]"
                       length="40"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[address]"
-                      name="address"
+                      lineageId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].Columns[stor_address]"
+                      name="stor_address"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[city]"
+                      refId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].Columns[city]"
                       codePage="1252"
                       dataType="str"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].ExternalColumns[city]"
+                      externalMetadataColumnId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].ExternalColumns[city]"
                       length="20"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[city]"
+                      lineageId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].Columns[city]"
                       name="city"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[state]"
+                      refId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].Columns[state]"
                       codePage="1252"
                       dataType="str"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].ExternalColumns[state]"
+                      externalMetadataColumnId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].ExternalColumns[state]"
                       length="2"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[state]"
+                      lineageId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].Columns[state]"
                       name="state"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[zip]"
+                      refId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].Columns[zip]"
                       codePage="1252"
                       dataType="str"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].ExternalColumns[zip]"
+                      externalMetadataColumnId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].ExternalColumns[zip]"
                       length="5"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[zip]"
+                      lineageId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].Columns[zip]"
                       name="zip"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[contract]"
-                      dataType="bool"
+                      refId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].Columns[discounttype]"
+                      codePage="1252"
+                      dataType="str"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].ExternalColumns[contract]"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[contract]"
-                      name="contract"
+                      externalMetadataColumnId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].ExternalColumns[discounttype]"
+                      length="40"
+                      lineageId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].Columns[discounttype]"
+                      name="discounttype"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[RowVersion]"
-                      dataType="bytes"
+                      refId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].Columns[lowqty]"
+                      dataType="i2"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].ExternalColumns[RowVersion]"
-                      length="8"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[RowVersion]"
-                      name="RowVersion"
+                      externalMetadataColumnId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].ExternalColumns[lowqty]"
+                      lineageId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].Columns[lowqty]"
+                      name="lowqty"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].Columns[highqty]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].ExternalColumns[highqty]"
+                      lineageId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].Columns[highqty]"
+                      name="highqty"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].Columns[discount]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].ExternalColumns[discount]"
+                      lineageId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].Columns[discount]"
+                      name="discount"
+                      precision="4"
+                      scale="2"
                       truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].ExternalColumns[au_id]"
+                      refId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].ExternalColumns[stor_id]"
                       codePage="1252"
                       dataType="str"
-                      length="11"
-                      name="au_id" />
+                      length="4"
+                      name="stor_id" />
                     <externalMetadataColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].ExternalColumns[au_lname]"
-                      codePage="1252"
-                      dataType="str"
-                      length="40"
-                      name="au_lname" />
-                    <externalMetadataColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].ExternalColumns[au_fname]"
-                      codePage="1252"
-                      dataType="str"
-                      length="20"
-                      name="au_fname" />
-                    <externalMetadataColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].ExternalColumns[phone]"
-                      codePage="1252"
-                      dataType="str"
-                      length="12"
-                      name="phone" />
-                    <externalMetadataColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].ExternalColumns[address]"
+                      refId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].ExternalColumns[stor_name]"
                       codePage="1252"
                       dataType="str"
                       length="40"
-                      name="address" />
+                      name="stor_name" />
                     <externalMetadataColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].ExternalColumns[city]"
+                      refId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].ExternalColumns[stor_address]"
+                      codePage="1252"
+                      dataType="str"
+                      length="40"
+                      name="stor_address" />
+                    <externalMetadataColumn
+                      refId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].ExternalColumns[city]"
                       codePage="1252"
                       dataType="str"
                       length="20"
                       name="city" />
                     <externalMetadataColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].ExternalColumns[state]"
+                      refId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].ExternalColumns[state]"
                       codePage="1252"
                       dataType="str"
                       length="2"
                       name="state" />
                     <externalMetadataColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].ExternalColumns[zip]"
+                      refId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].ExternalColumns[zip]"
                       codePage="1252"
                       dataType="str"
                       length="5"
                       name="zip" />
                     <externalMetadataColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].ExternalColumns[contract]"
-                      dataType="bool"
-                      name="contract" />
+                      refId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].ExternalColumns[discounttype]"
+                      codePage="1252"
+                      dataType="str"
+                      length="40"
+                      name="discounttype" />
                     <externalMetadataColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].ExternalColumns[RowVersion]"
-                      dataType="bytes"
-                      length="8"
-                      name="RowVersion" />
+                      refId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].ExternalColumns[lowqty]"
+                      dataType="i2"
+                      name="lowqty" />
+                    <externalMetadataColumn
+                      refId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].ExternalColumns[highqty]"
+                      dataType="i2"
+                      name="highqty" />
+                    <externalMetadataColumn
+                      refId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].ExternalColumns[discount]"
+                      dataType="numeric"
+                      name="discount"
+                      precision="4"
+                      scale="2" />
                   </externalMetadataColumns>
                 </output>
                 <output
-                  refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output]"
+                  refId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Error Output]"
                   isErrorOut="true"
                   name="OLE DB Source Error Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output].Columns[au_id]"
+                      refId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Error Output].Columns[stor_id]"
                       codePage="1252"
                       dataType="str"
-                      length="11"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output].Columns[au_id]"
-                      name="au_id" />
+                      length="4"
+                      lineageId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Error Output].Columns[stor_id]"
+                      name="stor_id" />
                     <outputColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output].Columns[au_lname]"
+                      refId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Error Output].Columns[stor_name]"
                       codePage="1252"
                       dataType="str"
                       length="40"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output].Columns[au_lname]"
-                      name="au_lname" />
+                      lineageId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Error Output].Columns[stor_name]"
+                      name="stor_name" />
                     <outputColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output].Columns[au_fname]"
-                      codePage="1252"
-                      dataType="str"
-                      length="20"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output].Columns[au_fname]"
-                      name="au_fname" />
-                    <outputColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output].Columns[phone]"
-                      codePage="1252"
-                      dataType="str"
-                      length="12"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output].Columns[phone]"
-                      name="phone" />
-                    <outputColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output].Columns[address]"
+                      refId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Error Output].Columns[stor_address]"
                       codePage="1252"
                       dataType="str"
                       length="40"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output].Columns[address]"
-                      name="address" />
+                      lineageId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Error Output].Columns[stor_address]"
+                      name="stor_address" />
                     <outputColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output].Columns[city]"
+                      refId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Error Output].Columns[city]"
                       codePage="1252"
                       dataType="str"
                       length="20"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output].Columns[city]"
+                      lineageId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Error Output].Columns[city]"
                       name="city" />
                     <outputColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output].Columns[state]"
+                      refId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Error Output].Columns[state]"
                       codePage="1252"
                       dataType="str"
                       length="2"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output].Columns[state]"
+                      lineageId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Error Output].Columns[state]"
                       name="state" />
                     <outputColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output].Columns[zip]"
+                      refId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Error Output].Columns[zip]"
                       codePage="1252"
                       dataType="str"
                       length="5"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output].Columns[zip]"
+                      lineageId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Error Output].Columns[zip]"
                       name="zip" />
                     <outputColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output].Columns[contract]"
-                      dataType="bool"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output].Columns[contract]"
-                      name="contract" />
+                      refId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Error Output].Columns[discounttype]"
+                      codePage="1252"
+                      dataType="str"
+                      length="40"
+                      lineageId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Error Output].Columns[discounttype]"
+                      name="discounttype" />
                     <outputColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output].Columns[RowVersion]"
-                      dataType="bytes"
-                      length="8"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output].Columns[RowVersion]"
-                      name="RowVersion" />
+                      refId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Error Output].Columns[lowqty]"
+                      dataType="i2"
+                      lineageId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Error Output].Columns[lowqty]"
+                      name="lowqty" />
                     <outputColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      refId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Error Output].Columns[highqty]"
+                      dataType="i2"
+                      lineageId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Error Output].Columns[highqty]"
+                      name="highqty" />
+                    <outputColumn
+                      refId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Error Output].Columns[discount]"
+                      dataType="numeric"
+                      lineageId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Error Output].Columns[discount]"
+                      name="discount"
+                      precision="4"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      lineageId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      refId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -454,11 +451,11 @@
               </outputs>
             </component>
             <component
-              refId="Package\Load Authors\Load New Authors"
+              refId="Package\Load Stores\Load New Stores"
               componentClassID="Microsoft.OLEDBDestination"
               contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
               description="OLE DB Destination"
-              name="Load New Authors"
+              name="Load New Stores"
               usesDispositions="true"
               version="4">
               <properties>
@@ -469,7 +466,7 @@
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[dbo].[DimAuthors]</property>
+                  name="OpenRowset">[dbo].[DimStores]</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -511,121 +508,93 @@
               </properties>
               <connections>
                 <connection
-                  refId="Package\Load Authors\Load New Authors.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[Destination.PubsDW]"
-                  connectionManagerRefId="Package.ConnectionManagers[Destination.PubsDW]"
+                  refId="Package\Load Stores\Load New Stores.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Detination.PubsDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[Detination.PubsDW]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
               <inputs>
                 <input
-                  refId="Package\Load Authors\Load New Authors.Inputs[OLE DB Destination Input]"
+                  refId="Package\Load Stores\Load New Stores.Inputs[OLE DB Destination Input]"
                   errorOrTruncationOperation="Insert"
                   errorRowDisposition="FailComponent"
                   hasSideEffects="true"
                   name="OLE DB Destination Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Load Authors\Load New Authors.Inputs[OLE DB Destination Input].Columns[au_id]"
+                      refId="Package\Load Stores\Load New Stores.Inputs[OLE DB Destination Input].Columns[stor_id]"
                       cachedCodepage="1252"
                       cachedDataType="str"
-                      cachedLength="11"
-                      cachedName="au_id"
-                      externalMetadataColumnId="Package\Load Authors\Load New Authors.Inputs[OLE DB Destination Input].ExternalColumns[au_id]"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[au_id]" />
+                      cachedLength="4"
+                      cachedName="stor_id"
+                      externalMetadataColumnId="Package\Load Stores\Load New Stores.Inputs[OLE DB Destination Input].ExternalColumns[stor_id]"
+                      lineageId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].Columns[stor_id]" />
                     <inputColumn
-                      refId="Package\Load Authors\Load New Authors.Inputs[OLE DB Destination Input].Columns[phone]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="12"
-                      cachedName="phone"
-                      externalMetadataColumnId="Package\Load Authors\Load New Authors.Inputs[OLE DB Destination Input].ExternalColumns[phone]"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[phone]" />
-                    <inputColumn
-                      refId="Package\Load Authors\Load New Authors.Inputs[OLE DB Destination Input].Columns[city]"
+                      refId="Package\Load Stores\Load New Stores.Inputs[OLE DB Destination Input].Columns[city]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="20"
                       cachedName="city"
-                      externalMetadataColumnId="Package\Load Authors\Load New Authors.Inputs[OLE DB Destination Input].ExternalColumns[city]"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[city]" />
+                      externalMetadataColumnId="Package\Load Stores\Load New Stores.Inputs[OLE DB Destination Input].ExternalColumns[city]"
+                      lineageId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].Columns[city]" />
                     <inputColumn
-                      refId="Package\Load Authors\Load New Authors.Inputs[OLE DB Destination Input].Columns[state]"
+                      refId="Package\Load Stores\Load New Stores.Inputs[OLE DB Destination Input].Columns[state]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="2"
                       cachedName="state"
-                      externalMetadataColumnId="Package\Load Authors\Load New Authors.Inputs[OLE DB Destination Input].ExternalColumns[state]"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[state]" />
+                      externalMetadataColumnId="Package\Load Stores\Load New Stores.Inputs[OLE DB Destination Input].ExternalColumns[state]"
+                      lineageId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].Columns[state]" />
                     <inputColumn
-                      refId="Package\Load Authors\Load New Authors.Inputs[OLE DB Destination Input].Columns[zip]"
+                      refId="Package\Load Stores\Load New Stores.Inputs[OLE DB Destination Input].Columns[zip]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="5"
                       cachedName="zip"
-                      externalMetadataColumnId="Package\Load Authors\Load New Authors.Inputs[OLE DB Destination Input].ExternalColumns[zip]"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[zip]" />
+                      externalMetadataColumnId="Package\Load Stores\Load New Stores.Inputs[OLE DB Destination Input].ExternalColumns[zip]"
+                      lineageId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].Columns[zip]" />
                     <inputColumn
-                      refId="Package\Load Authors\Load New Authors.Inputs[OLE DB Destination Input].Columns[au_lname]"
+                      refId="Package\Load Stores\Load New Stores.Inputs[OLE DB Destination Input].Columns[stor_name]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="40"
-                      cachedName="au_lname"
-                      externalMetadataColumnId="Package\Load Authors\Load New Authors.Inputs[OLE DB Destination Input].ExternalColumns[lastNname]"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[au_lname]" />
-                    <inputColumn
-                      refId="Package\Load Authors\Load New Authors.Inputs[OLE DB Destination Input].Columns[au_fname]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="20"
-                      cachedName="au_fname"
-                      externalMetadataColumnId="Package\Load Authors\Load New Authors.Inputs[OLE DB Destination Input].ExternalColumns[FirstName]"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[au_fname]" />
+                      cachedName="stor_name"
+                      externalMetadataColumnId="Package\Load Stores\Load New Stores.Inputs[OLE DB Destination Input].ExternalColumns[storeName]"
+                      lineageId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].Columns[stor_name]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\Load Authors\Load New Authors.Inputs[OLE DB Destination Input].ExternalColumns[AuthorSK]"
+                      refId="Package\Load Stores\Load New Stores.Inputs[OLE DB Destination Input].ExternalColumns[StoreSK]"
                       dataType="i4"
-                      name="AuthorSK" />
+                      name="StoreSK" />
                     <externalMetadataColumn
-                      refId="Package\Load Authors\Load New Authors.Inputs[OLE DB Destination Input].ExternalColumns[au_id]"
+                      refId="Package\Load Stores\Load New Stores.Inputs[OLE DB Destination Input].ExternalColumns[stor_id]"
                       codePage="1252"
                       dataType="str"
-                      length="11"
-                      name="au_id" />
+                      length="4"
+                      name="stor_id" />
                     <externalMetadataColumn
-                      refId="Package\Load Authors\Load New Authors.Inputs[OLE DB Destination Input].ExternalColumns[lastNname]"
+                      refId="Package\Load Stores\Load New Stores.Inputs[OLE DB Destination Input].ExternalColumns[storeName]"
                       codePage="1252"
                       dataType="str"
                       length="40"
-                      name="lastNname" />
+                      name="storeName" />
                     <externalMetadataColumn
-                      refId="Package\Load Authors\Load New Authors.Inputs[OLE DB Destination Input].ExternalColumns[FirstName]"
-                      codePage="1252"
-                      dataType="str"
-                      length="20"
-                      name="FirstName" />
-                    <externalMetadataColumn
-                      refId="Package\Load Authors\Load New Authors.Inputs[OLE DB Destination Input].ExternalColumns[phone]"
-                      codePage="1252"
-                      dataType="str"
-                      length="12"
-                      name="phone" />
-                    <externalMetadataColumn
-                      refId="Package\Load Authors\Load New Authors.Inputs[OLE DB Destination Input].ExternalColumns[city]"
+                      refId="Package\Load Stores\Load New Stores.Inputs[OLE DB Destination Input].ExternalColumns[city]"
                       codePage="1252"
                       dataType="str"
                       length="20"
                       name="city" />
                     <externalMetadataColumn
-                      refId="Package\Load Authors\Load New Authors.Inputs[OLE DB Destination Input].ExternalColumns[state]"
+                      refId="Package\Load Stores\Load New Stores.Inputs[OLE DB Destination Input].ExternalColumns[state]"
                       codePage="1252"
                       dataType="str"
                       length="2"
                       name="state" />
                     <externalMetadataColumn
-                      refId="Package\Load Authors\Load New Authors.Inputs[OLE DB Destination Input].ExternalColumns[zip]"
+                      refId="Package\Load Stores\Load New Stores.Inputs[OLE DB Destination Input].ExternalColumns[zip]"
                       codePage="1252"
                       dataType="str"
                       length="5"
@@ -635,22 +604,22 @@
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Load Authors\Load New Authors.Outputs[OLE DB Destination Error Output]"
+                  refId="Package\Load Stores\Load New Stores.Outputs[OLE DB Destination Error Output]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="OLE DB Destination Error Output"
-                  synchronousInputId="Package\Load Authors\Load New Authors.Inputs[OLE DB Destination Input]">
+                  synchronousInputId="Package\Load Stores\Load New Stores.Inputs[OLE DB Destination Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Load Authors\Load New Authors.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      refId="Package\Load Stores\Load New Stores.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Load Authors\Load New Authors.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      lineageId="Package\Load Stores\Load New Stores.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Load Authors\Load New Authors.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      refId="Package\Load Stores\Load New Stores.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Load Authors\Load New Authors.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\Load Stores\Load New Stores.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -659,7 +628,7 @@
               </outputs>
             </component>
             <component
-              refId="Package\Load Authors\Lookup"
+              refId="Package\Load Stores\Lookup"
               componentClassID="Microsoft.Lookup"
               contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
               description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
@@ -672,14 +641,14 @@
                   description="Specifies the SQL statement that generates the lookup table."
                   expressionType="Notify"
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from [dbo].[DimAuthors]</property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from [dbo].[DimStores]</property>
                 <property
                   dataType="System.String"
                   description="Specifies a SQL statement that uses parameters to generate the lookup table."
                   expressionType="Notify"
                   name="SqlCommandParam"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (select * from [dbo].[DimAuthors]) [refTable]
-where [refTable].[au_id] = ? and [refTable].[lastNname] = ? and [refTable].[FirstName] = ? and [refTable].[phone] = ? and [refTable].[city] = ? and [refTable].[state] = ? and [refTable].[zip] = ?</property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (select * from [dbo].[DimStores]) [refTable]
+where [refTable].[stor_id] = ? and [refTable].[storeName] = ? and [refTable].[city] = ? and [refTable].[state] = ? and [refTable].[zip] = ?</property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the type of connection used to access the reference dataset."
@@ -710,12 +679,12 @@ where [refTable].[au_id] = ? and [refTable].[lastNname] = ? and [refTable].[Firs
                 <property
                   dataType="System.String"
                   description="Indicates whether to reference metadata in an XML format."
-                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="AuthorSK" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="au_id" dataType="DT_STR" length="11" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="lastNname" dataType="DT_STR" length="40" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="FirstName" dataType="DT_STR" length="20" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="phone" dataType="DT_STR" length="12" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="city" dataType="DT_STR" length="20" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="state" dataType="DT_STR" length="2" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="zip" dataType="DT_STR" length="5" precision="0" scale="0" codePage="1252"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="StoreSK" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="stor_id" dataType="DT_STR" length="4" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="storeName" dataType="DT_STR" length="40" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="city" dataType="DT_STR" length="20" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="state" dataType="DT_STR" length="2" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="zip" dataType="DT_STR" length="5" precision="0" scale="0" codePage="1252"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
                 <property
                   containsID="true"
                   dataType="System.String"
                   description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
-                  name="ParameterMap">#{Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[au_id]};#{Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[au_lname]};#{Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[au_fname]};#{Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[phone]};#{Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[city]};#{Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[state]};#{Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[zip]};</property>
+                  name="ParameterMap">#{Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].Columns[stor_id]};#{Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].Columns[stor_name]};#{Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].Columns[city]};#{Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].Columns[state]};#{Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].Columns[zip]};</property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -727,29 +696,29 @@ where [refTable].[au_id] = ? and [refTable].[lastNname] = ? and [refTable].[Firs
               </properties>
               <connections>
                 <connection
-                  refId="Package\Load Authors\Lookup.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[Destination.PubsDW]"
-                  connectionManagerRefId="Package.ConnectionManagers[Destination.PubsDW]"
+                  refId="Package\Load Stores\Lookup.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Detination.PubsDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[Detination.PubsDW]"
                   description="Connection manager used to access lookup data."
                   name="OleDbConnection" />
               </connections>
               <inputs>
                 <input
-                  refId="Package\Load Authors\Lookup.Inputs[Lookup Input]"
+                  refId="Package\Load Stores\Lookup.Inputs[Lookup Input]"
                   name="Lookup Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Load Authors\Lookup.Inputs[Lookup Input].Columns[au_id]"
+                      refId="Package\Load Stores\Lookup.Inputs[Lookup Input].Columns[stor_id]"
                       cachedCodepage="1252"
                       cachedDataType="str"
-                      cachedLength="11"
-                      cachedName="au_id"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[au_id]">
+                      cachedLength="4"
+                      cachedName="stor_id"
+                      lineageId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].Columns[stor_id]">
                       <properties>
                         <property
                           dataType="System.String"
                           description="Specifies the column in the reference table that a column joins."
-                          name="JoinToReferenceColumn">au_id</property>
+                          name="JoinToReferenceColumn">stor_id</property>
                         <property
                           dataType="System.Null"
                           description="Specifies the column in the reference table from which a column is copied."
@@ -757,17 +726,17 @@ where [refTable].[au_id] = ? and [refTable].[lastNname] = ? and [refTable].[Firs
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Load Authors\Lookup.Inputs[Lookup Input].Columns[au_lname]"
+                      refId="Package\Load Stores\Lookup.Inputs[Lookup Input].Columns[stor_name]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="40"
-                      cachedName="au_lname"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[au_lname]">
+                      cachedName="stor_name"
+                      lineageId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].Columns[stor_name]">
                       <properties>
                         <property
                           dataType="System.String"
                           description="Specifies the column in the reference table that a column joins."
-                          name="JoinToReferenceColumn">lastNname</property>
+                          name="JoinToReferenceColumn">storeName</property>
                         <property
                           dataType="System.Null"
                           description="Specifies the column in the reference table from which a column is copied."
@@ -775,48 +744,12 @@ where [refTable].[au_id] = ? and [refTable].[lastNname] = ? and [refTable].[Firs
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Load Authors\Lookup.Inputs[Lookup Input].Columns[au_fname]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="20"
-                      cachedName="au_fname"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[au_fname]">
-                      <properties>
-                        <property
-                          dataType="System.String"
-                          description="Specifies the column in the reference table that a column joins."
-                          name="JoinToReferenceColumn">FirstName</property>
-                        <property
-                          dataType="System.Null"
-                          description="Specifies the column in the reference table from which a column is copied."
-                          name="CopyFromReferenceColumn" />
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Load Authors\Lookup.Inputs[Lookup Input].Columns[phone]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="12"
-                      cachedName="phone"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[phone]">
-                      <properties>
-                        <property
-                          dataType="System.String"
-                          description="Specifies the column in the reference table that a column joins."
-                          name="JoinToReferenceColumn">phone</property>
-                        <property
-                          dataType="System.Null"
-                          description="Specifies the column in the reference table from which a column is copied."
-                          name="CopyFromReferenceColumn" />
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Load Authors\Lookup.Inputs[Lookup Input].Columns[city]"
+                      refId="Package\Load Stores\Lookup.Inputs[Lookup Input].Columns[city]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="20"
                       cachedName="city"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[city]">
+                      lineageId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].Columns[city]">
                       <properties>
                         <property
                           dataType="System.String"
@@ -829,12 +762,12 @@ where [refTable].[au_id] = ? and [refTable].[lastNname] = ? and [refTable].[Firs
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Load Authors\Lookup.Inputs[Lookup Input].Columns[state]"
+                      refId="Package\Load Stores\Lookup.Inputs[Lookup Input].Columns[state]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="2"
                       cachedName="state"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[state]">
+                      lineageId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].Columns[state]">
                       <properties>
                         <property
                           dataType="System.String"
@@ -847,12 +780,12 @@ where [refTable].[au_id] = ? and [refTable].[lastNname] = ? and [refTable].[Firs
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Load Authors\Lookup.Inputs[Lookup Input].Columns[zip]"
+                      refId="Package\Load Stores\Lookup.Inputs[Lookup Input].Columns[zip]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="5"
                       cachedName="zip"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[zip]">
+                      lineageId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].Columns[zip]">
                       <properties>
                         <property
                           dataType="System.String"
@@ -870,54 +803,54 @@ where [refTable].[au_id] = ? and [refTable].[lastNname] = ? and [refTable].[Firs
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Load Authors\Lookup.Outputs[Lookup Match Output]"
+                  refId="Package\Load Stores\Lookup.Outputs[Lookup Match Output]"
                   errorOrTruncationOperation="Lookup"
                   exclusionGroup="1"
                   name="Lookup Match Output"
-                  synchronousInputId="Package\Load Authors\Lookup.Inputs[Lookup Input]">
+                  synchronousInputId="Package\Load Stores\Lookup.Inputs[Lookup Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Load Authors\Lookup.Outputs[Lookup Match Output].Columns[AuthorSK]"
+                      refId="Package\Load Stores\Lookup.Outputs[Lookup Match Output].Columns[StoreSK]"
                       dataType="i4"
                       errorOrTruncationOperation="Copy Column"
-                      lineageId="Package\Load Authors\Lookup.Outputs[Lookup Match Output].Columns[AuthorSK]"
-                      name="AuthorSK"
+                      lineageId="Package\Load Stores\Lookup.Outputs[Lookup Match Output].Columns[StoreSK]"
+                      name="StoreSK"
                       truncationRowDisposition="FailComponent">
                       <properties>
                         <property
                           dataType="System.String"
                           description="Specifies the column in the reference table from which a column is copied."
-                          name="CopyFromReferenceColumn">AuthorSK</property>
+                          name="CopyFromReferenceColumn">StoreSK</property>
                       </properties>
                     </outputColumn>
                   </outputColumns>
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\Load Authors\Lookup.Outputs[Lookup No Match Output]"
+                  refId="Package\Load Stores\Lookup.Outputs[Lookup No Match Output]"
                   description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
                   exclusionGroup="1"
                   name="Lookup No Match Output"
-                  synchronousInputId="Package\Load Authors\Lookup.Inputs[Lookup Input]">
+                  synchronousInputId="Package\Load Stores\Lookup.Inputs[Lookup Input]">
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\Load Authors\Lookup.Outputs[Lookup Error Output]"
+                  refId="Package\Load Stores\Lookup.Outputs[Lookup Error Output]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="Lookup Error Output"
-                  synchronousInputId="Package\Load Authors\Lookup.Inputs[Lookup Input]">
+                  synchronousInputId="Package\Load Stores\Lookup.Inputs[Lookup Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Load Authors\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      refId="Package\Load Stores\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Load Authors\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      lineageId="Package\Load Stores\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Load Authors\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      refId="Package\Load Stores\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Load Authors\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\Load Stores\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -926,11 +859,11 @@ where [refTable].[au_id] = ? and [refTable].[lastNname] = ? and [refTable].[Firs
               </outputs>
             </component>
             <component
-              refId="Package\Load Authors\Update Existing Authors"
+              refId="Package\Load Stores\OLE DB Destination"
               componentClassID="Microsoft.OLEDBDestination"
               contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
               description="OLE DB Destination"
-              name="Update Existing Authors"
+              name="OLE DB Destination"
               usesDispositions="true"
               version="4">
               <properties>
@@ -941,7 +874,7 @@ where [refTable].[au_id] = ? and [refTable].[lastNname] = ? and [refTable].[Firs
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[staging].[authors]</property>
+                  name="OpenRowset">[staging].[stores]</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -983,127 +916,99 @@ where [refTable].[au_id] = ? and [refTable].[lastNname] = ? and [refTable].[Firs
               </properties>
               <connections>
                 <connection
-                  refId="Package\Load Authors\Update Existing Authors.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[Destination.PubsDW]"
-                  connectionManagerRefId="Package.ConnectionManagers[Destination.PubsDW]"
+                  refId="Package\Load Stores\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Detination.PubsDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[Detination.PubsDW]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
               <inputs>
                 <input
-                  refId="Package\Load Authors\Update Existing Authors.Inputs[OLE DB Destination Input]"
+                  refId="Package\Load Stores\OLE DB Destination.Inputs[OLE DB Destination Input]"
                   errorOrTruncationOperation="Insert"
                   errorRowDisposition="FailComponent"
                   hasSideEffects="true"
                   name="OLE DB Destination Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Load Authors\Update Existing Authors.Inputs[OLE DB Destination Input].Columns[au_id]"
+                      refId="Package\Load Stores\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[stor_id]"
                       cachedCodepage="1252"
                       cachedDataType="str"
-                      cachedLength="11"
-                      cachedName="au_id"
-                      externalMetadataColumnId="Package\Load Authors\Update Existing Authors.Inputs[OLE DB Destination Input].ExternalColumns[au_id]"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[au_id]" />
+                      cachedLength="4"
+                      cachedName="stor_id"
+                      externalMetadataColumnId="Package\Load Stores\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[stor_id]"
+                      lineageId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].Columns[stor_id]" />
                     <inputColumn
-                      refId="Package\Load Authors\Update Existing Authors.Inputs[OLE DB Destination Input].Columns[phone]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="12"
-                      cachedName="phone"
-                      externalMetadataColumnId="Package\Load Authors\Update Existing Authors.Inputs[OLE DB Destination Input].ExternalColumns[phone]"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[phone]" />
-                    <inputColumn
-                      refId="Package\Load Authors\Update Existing Authors.Inputs[OLE DB Destination Input].Columns[city]"
+                      refId="Package\Load Stores\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[city]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="20"
                       cachedName="city"
-                      externalMetadataColumnId="Package\Load Authors\Update Existing Authors.Inputs[OLE DB Destination Input].ExternalColumns[city]"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[city]" />
+                      externalMetadataColumnId="Package\Load Stores\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[city]"
+                      lineageId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].Columns[city]" />
                     <inputColumn
-                      refId="Package\Load Authors\Update Existing Authors.Inputs[OLE DB Destination Input].Columns[state]"
+                      refId="Package\Load Stores\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[state]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="2"
                       cachedName="state"
-                      externalMetadataColumnId="Package\Load Authors\Update Existing Authors.Inputs[OLE DB Destination Input].ExternalColumns[state]"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[state]" />
+                      externalMetadataColumnId="Package\Load Stores\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[state]"
+                      lineageId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].Columns[state]" />
                     <inputColumn
-                      refId="Package\Load Authors\Update Existing Authors.Inputs[OLE DB Destination Input].Columns[zip]"
+                      refId="Package\Load Stores\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[zip]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="5"
                       cachedName="zip"
-                      externalMetadataColumnId="Package\Load Authors\Update Existing Authors.Inputs[OLE DB Destination Input].ExternalColumns[zip]"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[zip]" />
+                      externalMetadataColumnId="Package\Load Stores\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[zip]"
+                      lineageId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].Columns[zip]" />
                     <inputColumn
-                      refId="Package\Load Authors\Update Existing Authors.Inputs[OLE DB Destination Input].Columns[AuthorSK]"
+                      refId="Package\Load Stores\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[StoreSK]"
                       cachedDataType="i4"
-                      cachedName="AuthorSK"
-                      externalMetadataColumnId="Package\Load Authors\Update Existing Authors.Inputs[OLE DB Destination Input].ExternalColumns[AuthorSK]"
-                      lineageId="Package\Load Authors\Lookup.Outputs[Lookup Match Output].Columns[AuthorSK]" />
+                      cachedName="StoreSK"
+                      externalMetadataColumnId="Package\Load Stores\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[StoreSK]"
+                      lineageId="Package\Load Stores\Lookup.Outputs[Lookup Match Output].Columns[StoreSK]" />
                     <inputColumn
-                      refId="Package\Load Authors\Update Existing Authors.Inputs[OLE DB Destination Input].Columns[au_lname]"
+                      refId="Package\Load Stores\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[stor_name]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="40"
-                      cachedName="au_lname"
-                      externalMetadataColumnId="Package\Load Authors\Update Existing Authors.Inputs[OLE DB Destination Input].ExternalColumns[lastNname]"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[au_lname]" />
-                    <inputColumn
-                      refId="Package\Load Authors\Update Existing Authors.Inputs[OLE DB Destination Input].Columns[au_fname]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="20"
-                      cachedName="au_fname"
-                      externalMetadataColumnId="Package\Load Authors\Update Existing Authors.Inputs[OLE DB Destination Input].ExternalColumns[FirstName]"
-                      lineageId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output].Columns[au_fname]" />
+                      cachedName="stor_name"
+                      externalMetadataColumnId="Package\Load Stores\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[storeName]"
+                      lineageId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output].Columns[stor_name]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\Load Authors\Update Existing Authors.Inputs[OLE DB Destination Input].ExternalColumns[AuthorSK]"
+                      refId="Package\Load Stores\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[StoreSK]"
                       dataType="i4"
-                      name="AuthorSK" />
+                      name="StoreSK" />
                     <externalMetadataColumn
-                      refId="Package\Load Authors\Update Existing Authors.Inputs[OLE DB Destination Input].ExternalColumns[au_id]"
+                      refId="Package\Load Stores\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[stor_id]"
                       codePage="1252"
                       dataType="str"
-                      length="11"
-                      name="au_id" />
+                      length="4"
+                      name="stor_id" />
                     <externalMetadataColumn
-                      refId="Package\Load Authors\Update Existing Authors.Inputs[OLE DB Destination Input].ExternalColumns[lastNname]"
+                      refId="Package\Load Stores\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[storeName]"
                       codePage="1252"
                       dataType="str"
                       length="40"
-                      name="lastNname" />
+                      name="storeName" />
                     <externalMetadataColumn
-                      refId="Package\Load Authors\Update Existing Authors.Inputs[OLE DB Destination Input].ExternalColumns[FirstName]"
-                      codePage="1252"
-                      dataType="str"
-                      length="20"
-                      name="FirstName" />
-                    <externalMetadataColumn
-                      refId="Package\Load Authors\Update Existing Authors.Inputs[OLE DB Destination Input].ExternalColumns[phone]"
-                      codePage="1252"
-                      dataType="str"
-                      length="12"
-                      name="phone" />
-                    <externalMetadataColumn
-                      refId="Package\Load Authors\Update Existing Authors.Inputs[OLE DB Destination Input].ExternalColumns[city]"
+                      refId="Package\Load Stores\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[city]"
                       codePage="1252"
                       dataType="str"
                       length="20"
                       name="city" />
                     <externalMetadataColumn
-                      refId="Package\Load Authors\Update Existing Authors.Inputs[OLE DB Destination Input].ExternalColumns[state]"
+                      refId="Package\Load Stores\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[state]"
                       codePage="1252"
                       dataType="str"
                       length="2"
                       name="state" />
                     <externalMetadataColumn
-                      refId="Package\Load Authors\Update Existing Authors.Inputs[OLE DB Destination Input].ExternalColumns[zip]"
+                      refId="Package\Load Stores\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[zip]"
                       codePage="1252"
                       dataType="str"
                       length="5"
@@ -1113,22 +1018,22 @@ where [refTable].[au_id] = ? and [refTable].[lastNname] = ? and [refTable].[Firs
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Load Authors\Update Existing Authors.Outputs[OLE DB Destination Error Output]"
+                  refId="Package\Load Stores\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="OLE DB Destination Error Output"
-                  synchronousInputId="Package\Load Authors\Update Existing Authors.Inputs[OLE DB Destination Input]">
+                  synchronousInputId="Package\Load Stores\OLE DB Destination.Inputs[OLE DB Destination Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Load Authors\Update Existing Authors.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      refId="Package\Load Stores\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Load Authors\Update Existing Authors.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      lineageId="Package\Load Stores\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Load Authors\Update Existing Authors.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      refId="Package\Load Stores\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Load Authors\Update Existing Authors.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\Load Stores\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -1139,45 +1044,45 @@ where [refTable].[au_id] = ? and [refTable].[lastNname] = ? and [refTable].[Firs
           </components>
           <paths>
             <path
-              refId="Package\Load Authors.Paths[Lookup Match Output]"
-              endId="Package\Load Authors\Update Existing Authors.Inputs[OLE DB Destination Input]"
+              refId="Package\Load Stores.Paths[Lookup Match Output]"
+              endId="Package\Load Stores\OLE DB Destination.Inputs[OLE DB Destination Input]"
               name="Lookup Match Output"
-              startId="Package\Load Authors\Lookup.Outputs[Lookup Match Output]" />
+              startId="Package\Load Stores\Lookup.Outputs[Lookup Match Output]" />
             <path
-              refId="Package\Load Authors.Paths[Lookup No Match Output]"
-              endId="Package\Load Authors\Load New Authors.Inputs[OLE DB Destination Input]"
+              refId="Package\Load Stores.Paths[Lookup No Match Output]"
+              endId="Package\Load Stores\Load New Stores.Inputs[OLE DB Destination Input]"
               name="Lookup No Match Output"
-              startId="Package\Load Authors\Lookup.Outputs[Lookup No Match Output]" />
+              startId="Package\Load Stores\Lookup.Outputs[Lookup No Match Output]" />
             <path
-              refId="Package\Load Authors.Paths[OLE DB Source Output]"
-              endId="Package\Load Authors\Lookup.Inputs[Lookup Input]"
+              refId="Package\Load Stores.Paths[OLE DB Source Output]"
+              endId="Package\Load Stores\Lookup.Inputs[Lookup Input]"
               name="OLE DB Source Output"
-              startId="Package\Load Authors\Get Authors.Outputs[OLE DB Source Output]" />
+              startId="Package\Load Stores\Get Stores.Outputs[OLE DB Source Output]" />
           </paths>
         </pipeline>
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\Sync Staging"
+      DTS:refId="Package\Sync Stores"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
-      DTS:DTSID="{71B6322A-39A9-4B9E-9935-71B4D2B51F61}"
+      DTS:DTSID="{5DF22C67-EB60-4043-BC91-E97A17DA4B21}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
-      DTS:ObjectName="Sync Staging"
+      DTS:ObjectName="Sync Stores"
       DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{B1389C55-40AE-4EA7-A41A-ED77911623A0}"
-          SQLTask:SqlStatementSource="EXECUTE [dbo].[DW_MergeDimAuthors] &#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:Connection="{4C8EB541-27F0-488E-BDE7-92C7F9397D7B}"
+          SQLTask:SqlStatementSource="EXECUTE [dbo].[DW_MergeDimStores] &#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
       DTS:refId="Package\Update PackageConfig"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
-      DTS:DTSID="{A1E72537-F63B-4814-A865-2942886B0B1C}"
+      DTS:DTSID="{46C309E2-0CFF-42AA-BF30-A69C78FBAB5A}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="Update PackageConfig"
@@ -1185,8 +1090,8 @@ where [refTable].[au_id] = ? and [refTable].[lastNname] = ? and [refTable].[Firs
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{B1389C55-40AE-4EA7-A41A-ED77911623A0}"
-          SQLTask:SqlStatementSource="EXECUTE [dbo].[UpdateLastPackageRowVersion] @tableName = 'Authors', @lastRowVersion = ?&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          SQLTask:Connection="{4C8EB541-27F0-488E-BDE7-92C7F9397D7B}"
+          SQLTask:SqlStatementSource="EXECUTE [dbo].[UpdateLastPackageRowVersion] @tableName = 'Stores', @lastRowVersion = ?&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
           <SQLTask:ParameterBinding
             SQLTask:ParameterName="0"
             SQLTask:DtsVariableName="User::dbts"
@@ -1201,7 +1106,7 @@ where [refTable].[au_id] = ? and [refTable].[lastNname] = ? and [refTable].[Firs
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint]"
       DTS:CreationName=""
-      DTS:DTSID="{79C90AE7-9F41-4698-BF99-81BEFC50DFD3}"
+      DTS:DTSID="{1C2B2228-884E-4B36-835B-0D6699567CAB}"
       DTS:From="Package\Get Database RowVersion"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint"
@@ -1209,7 +1114,7 @@ where [refTable].[au_id] = ? and [refTable].[lastNname] = ? and [refTable].[Firs
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
       DTS:CreationName=""
-      DTS:DTSID="{18874876-4CB2-45EB-8010-7D5A201B7940}"
+      DTS:DTSID="{FA97648F-5D61-49D6-BD20-EA867B80D0BB}"
       DTS:From="Package\Get Last RowVersion"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 1"
@@ -1217,24 +1122,24 @@ where [refTable].[au_id] = ? and [refTable].[lastNname] = ? and [refTable].[Firs
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
       DTS:CreationName=""
-      DTS:DTSID="{856C60ED-7646-4E30-8496-9464BC2D852B}"
+      DTS:DTSID="{035F035C-3D42-4ECF-A7CC-5DDA1604E0B2}"
       DTS:From="Package\Clean-Up Staging"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 2"
-      DTS:To="Package\Load Authors" />
+      DTS:To="Package\Load Stores" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
       DTS:CreationName=""
-      DTS:DTSID="{BB495777-D022-4ABF-9035-2CAFF9400D1B}"
-      DTS:From="Package\Load Authors"
+      DTS:DTSID="{12DC6DDA-0AFC-4233-83DA-929C9BCDF030}"
+      DTS:From="Package\Load Stores"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 3"
-      DTS:To="Package\Sync Staging" />
+      DTS:To="Package\Sync Stores" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
       DTS:CreationName=""
-      DTS:DTSID="{DDDEE829-3737-4513-A9CB-7A0F212ABF43}"
-      DTS:From="Package\Sync Staging"
+      DTS:DTSID="{D99B143C-1732-45C4-84C2-2F26057E1EDB}"
+      DTS:From="Package\Sync Stores"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 4"
       DTS:To="Package\Update PackageConfig" />
@@ -1254,25 +1159,25 @@ where [refTable].[au_id] = ? and [refTable].[lastNname] = ? and [refTable].[Firs
         <NodeLayout
           Size="201,42"
           Id="Package\Get Database RowVersion"
-          TopLeft="735,33" />
+          TopLeft="762,69" />
         <NodeLayout
           Size="176,42"
           Id="Package\Get Last RowVersion"
-          TopLeft="743,132" />
+          TopLeft="778,160" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="833.25,75">
+          TopLeft="864.25,111">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,57"
+              EndConnector="0,49"
               Start="0,0"
-              End="0,49.5">
+              End="0,41.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,49.5" />
+                    End="0,41.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1284,21 +1189,33 @@ where [refTable].[au_id] = ? and [refTable].[lastNname] = ? and [refTable].[Firs
         <NodeLayout
           Size="160,42"
           Id="Package\Clean-Up Staging"
-          TopLeft="753,217" />
+          TopLeft="773,270" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="832,174">
+          TopLeft="866,202">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,43"
+              EndConnector="-13,68"
               Start="0,0"
-              End="0,35.5">
+              End="-13,60.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,35.5" />
+                    End="0,30" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,30"
+                    Point2="0,34"
+                    Point3="-4,34" />
+                  <mssgle:LineSegment
+                    End="-9,34" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-9,34"
+                    Point2="-13,34"
+                    Point3="-13,38" />
+                  <mssgle:LineSegment
+                    End="-13,60.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1308,23 +1225,23 @@ where [refTable].[au_id] = ? and [refTable].[lastNname] = ? and [refTable].[Firs
           </EdgeLayout.Labels>
         </EdgeLayout>
         <NodeLayout
-          Size="141,42"
-          Id="Package\Load Authors"
-          TopLeft="759,305" />
+          Size="134,42"
+          Id="Package\Load Stores"
+          TopLeft="783,364" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="831.25,259">
+          TopLeft="851.5,312">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,46"
+              EndConnector="0,52"
               Start="0,0"
-              End="0,38.5">
+              End="0,44.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,38.5" />
+                    End="0,44.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1334,38 +1251,12 @@ where [refTable].[au_id] = ? and [refTable].[lastNname] = ? and [refTable].[Firs
           </EdgeLayout.Labels>
         </EdgeLayout>
         <NodeLayout
-          Size="140,42"
-          Id="Package\Sync Staging"
-          TopLeft="756,381" />
+          Size="134,42"
+          Id="Package\Sync Stores"
+          TopLeft="777,448" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="827.75,347">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,34"
-              Start="0,0"
-              End="0,26.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,26.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="185,42"
-          Id="Package\Update PackageConfig"
-          TopLeft="729,465" />
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 4]"
-          TopLeft="823.75,423">
+          TopLeft="847,406">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -1385,36 +1276,62 @@ where [refTable].[au_id] = ? and [refTable].[lastNname] = ? and [refTable].[Firs
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </Package>
-  <TaskHost
-    design-time-name="Package\Load Authors">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="135,42"
-          Id="Package\Load Authors\Get Authors"
-          TopLeft="663,121" />
-        <NodeLayout
-          Size="113,42"
-          Id="Package\Load Authors\Lookup"
-          TopLeft="674,197" />
+          Size="185,42"
+          Id="Package\Update PackageConfig"
+          TopLeft="756,542" />
         <EdgeLayout
-          Id="Package\Load Authors.Paths[OLE DB Source Output]"
-          TopLeft="730.5,163">
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="846.25,490">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,34"
+              EndConnector="0,52"
               Start="0,0"
-              End="0,26.5">
+              End="0,44.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,26.5" />
+                    End="0,44.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Load Stores">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="128,42"
+          Id="Package\Load Stores\Get Stores"
+          TopLeft="782,161" />
+        <NodeLayout
+          Size="113,42"
+          Id="Package\Load Stores\Lookup"
+          TopLeft="792,248" />
+        <EdgeLayout
+          Id="Package\Load Stores.Paths[OLE DB Source Output]"
+          TopLeft="847.25,203">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,45"
+              Start="0,0"
+              End="0,37.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1424,82 +1341,82 @@ where [refTable].[au_id] = ? and [refTable].[lastNname] = ? and [refTable].[Firs
           </EdgeLayout.Labels>
         </EdgeLayout>
         <NodeLayout
-          Size="165,42"
-          Id="Package\Load Authors\Load New Authors"
-          TopLeft="812,281" />
+          Size="158,42"
+          Id="Package\Load Stores\Load New Stores"
+          TopLeft="923,358" />
         <EdgeLayout
-          Id="Package\Load Authors.Paths[Lookup No Match Output]"
-          TopLeft="730.5,239">
+          Id="Package\Load Stores.Paths[Lookup No Match Output]"
+          TopLeft="848.5,290">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="164,42"
+              EndConnector="153.5,68"
               Start="0,0"
-              End="164,34.5">
+              End="153.5,60.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,17" />
+                    End="0,30" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,17"
-                    Point2="0,21"
-                    Point3="4,21" />
+                    Point1="0,30"
+                    Point2="0,34"
+                    Point3="4,34" />
                   <mssgle:LineSegment
-                    End="160,21" />
+                    End="149.5,34" />
                   <mssgle:CubicBezierSegment
-                    Point1="160,21"
-                    Point2="164,21"
-                    Point3="164,25" />
+                    Point1="149.5,34"
+                    Point2="153.5,34"
+                    Point3="153.5,38" />
                   <mssgle:LineSegment
-                    End="164,34.5" />
+                    End="153.5,60.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="26.19361328125,26,111.6127734375,11.609375"
+              BoundingBox="20.94361328125,39,111.6127734375,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <NodeLayout
-          Size="192,42"
-          Id="Package\Load Authors\Update Existing Authors"
-          TopLeft="505,285" />
+          Size="172,42"
+          Id="Package\Load Stores\OLE DB Destination"
+          TopLeft="651,352" />
         <EdgeLayout
-          Id="Package\Load Authors.Paths[Lookup Match Output]"
-          TopLeft="713,239">
+          Id="Package\Load Stores.Paths[Lookup Match Output]"
+          TopLeft="831,290">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-112,46"
+              EndConnector="-94,62"
               Start="0,0"
-              End="-112,38.5">
+              End="-94,54.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,14.7853403141361" />
+                    End="0,21.3193717277487" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,14.7853403141361"
-                    Point2="0,18.7853403141361"
-                    Point3="-4,18.7853403141361" />
+                    Point1="0,21.3193717277487"
+                    Point2="0,25.3193717277487"
+                    Point3="-4,25.3193717277487" />
                   <mssgle:LineSegment
-                    End="-108,18.7853403141361" />
+                    End="-90,25.3193717277487" />
                   <mssgle:CubicBezierSegment
-                    Point1="-108,18.7853403141361"
-                    Point2="-112,18.7853403141361"
-                    Point3="-112,22.7853403141361" />
+                    Point1="-90,25.3193717277487"
+                    Point2="-94,25.3193717277487"
+                    Point3="-94,29.3193717277487" />
                   <mssgle:LineSegment
-                    End="-112,38.5" />
+                    End="-94,54.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-104.19138671875,23.7853403141361,96.3827734375,11.609375"
+              BoundingBox="-95.19138671875,30.3193717277487,96.3827734375,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -1507,7 +1424,7 @@ where [refTable].[au_id] = ? and [refTable].[lastNname] = ? and [refTable].[Firs
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Load Authors\Get Authors">
+    design-time-name="Package\Load Stores\Get Stores">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -1515,7 +1432,7 @@ where [refTable].[au_id] = ? and [refTable].[lastNname] = ? and [refTable].[Firs
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Load Authors\Lookup">
+    design-time-name="Package\Load Stores\Lookup">
     <Properties>
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
@@ -1525,7 +1442,7 @@ where [refTable].[au_id] = ? and [refTable].[lastNname] = ? and [refTable].[Firs
       <Property>
         <Name>UsedTableName</Name>
         <Value
-          type="q3:string">[dbo].[DimAuthors]</Value>
+          type="q3:string">[dbo].[DimStores]</Value>
       </Property>
       <Property>
         <Name>TableInfoObjectType</Name>
@@ -1538,7 +1455,7 @@ where [refTable].[au_id] = ? and [refTable].[lastNname] = ? and [refTable].[Firs
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Load Authors\Load New Authors">
+    design-time-name="Package\Load Stores\Load New Stores">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -1551,7 +1468,7 @@ where [refTable].[au_id] = ? and [refTable].[lastNname] = ? and [refTable].[Firs
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Load Authors\Update Existing Authors">
+    design-time-name="Package\Load Stores\OLE DB Destination">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>

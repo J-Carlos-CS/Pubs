@@ -96,4 +96,7 @@
     <None Include="Scripts\PackageConfig.data.sql" />
     <None Include="Scripts\PatchDimDate.data.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="PubsDW.refactorlog" />
+  </ItemGroup>
 </Project>

@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="DimStores"
   DTS:PackageType="5"
-  DTS:VersionBuild="17"
-  DTS:VersionGUID="{CA24C580-D4D1-49B1-95A7-C7A6D5A0B545}">
+  DTS:VersionBuild="20"
+  DTS:VersionGUID="{77A9B466-6D9D-4C17-9A50-03299589365F}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -1157,6 +1157,10 @@ where [refTable].[stor_id] = ? and [refTable].[storeName] = ? and [refTable].[ci
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
+          Size="160,42"
+          Id="Package\Clean-Up Staging"
+          TopLeft="773,270" />
+        <NodeLayout
           Size="201,42"
           Id="Package\Get Database RowVersion"
           TopLeft="762,69" />
@@ -1164,6 +1168,18 @@ where [refTable].[stor_id] = ? and [refTable].[storeName] = ? and [refTable].[ci
           Size="176,42"
           Id="Package\Get Last RowVersion"
           TopLeft="778,160" />
+        <NodeLayout
+          Size="134,42"
+          Id="Package\Load Stores"
+          TopLeft="783,364" />
+        <NodeLayout
+          Size="134,42"
+          Id="Package\Sync Stores"
+          TopLeft="777,448" />
+        <NodeLayout
+          Size="185,42"
+          Id="Package\Update PackageConfig"
+          TopLeft="757,542" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
           TopLeft="864.25,111">
@@ -1186,10 +1202,6 @@ where [refTable].[stor_id] = ? and [refTable].[storeName] = ? and [refTable].[ci
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="160,42"
-          Id="Package\Clean-Up Staging"
-          TopLeft="773,270" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
           TopLeft="866,202">
@@ -1224,10 +1236,6 @@ where [refTable].[stor_id] = ? and [refTable].[storeName] = ? and [refTable].[ci
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="134,42"
-          Id="Package\Load Stores"
-          TopLeft="783,364" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
           TopLeft="851.5,312">
@@ -1250,10 +1258,6 @@ where [refTable].[stor_id] = ? and [refTable].[storeName] = ? and [refTable].[ci
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="134,42"
-          Id="Package\Sync Stores"
-          TopLeft="777,448" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
           TopLeft="847,406">
@@ -1276,13 +1280,9 @@ where [refTable].[stor_id] = ? and [refTable].[storeName] = ? and [refTable].[ci
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="185,42"
-          Id="Package\Update PackageConfig"
-          TopLeft="756,542" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 4]"
-          TopLeft="846.25,490">
+          TopLeft="846.75,490">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -1311,13 +1311,21 @@ where [refTable].[stor_id] = ? and [refTable].[storeName] = ? and [refTable].[ci
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
+          Size="113,42"
+          Id="Package\Load Stores\Lookup"
+          TopLeft="792,248" />
+        <NodeLayout
+          Size="158,42"
+          Id="Package\Load Stores\Load New Stores"
+          TopLeft="923,358" />
+        <NodeLayout
           Size="128,42"
           Id="Package\Load Stores\Get Stores"
           TopLeft="782,161" />
         <NodeLayout
-          Size="113,42"
-          Id="Package\Load Stores\Lookup"
-          TopLeft="792,248" />
+          Size="172,42"
+          Id="Package\Load Stores\OLE DB Destination"
+          TopLeft="651,352" />
         <EdgeLayout
           Id="Package\Load Stores.Paths[OLE DB Source Output]"
           TopLeft="847.25,203">
@@ -1340,10 +1348,6 @@ where [refTable].[stor_id] = ? and [refTable].[storeName] = ? and [refTable].[ci
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="158,42"
-          Id="Package\Load Stores\Load New Stores"
-          TopLeft="923,358" />
         <EdgeLayout
           Id="Package\Load Stores.Paths[Lookup No Match Output]"
           TopLeft="848.5,290">
@@ -1380,10 +1384,6 @@ where [refTable].[stor_id] = ? and [refTable].[storeName] = ? and [refTable].[ci
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="172,42"
-          Id="Package\Load Stores\OLE DB Destination"
-          TopLeft="651,352" />
         <EdgeLayout
           Id="Package\Load Stores.Paths[Lookup Match Output]"
           TopLeft="831,290">
@@ -1424,20 +1424,12 @@ where [refTable].[stor_id] = ? and [refTable].[storeName] = ? and [refTable].[ci
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Load Stores\Get Stores">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
     design-time-name="Package\Load Stores\Lookup">
     <Properties>
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
         <Value
-          type="q2:boolean">false</Value>
+          type="q2:string">false</Value>
       </Property>
       <Property>
         <Name>UsedTableName</Name>
@@ -1447,7 +1439,7 @@ where [refTable].[stor_id] = ? and [refTable].[storeName] = ? and [refTable].[ci
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:int">0</Value>
+          type="q4:string">0</Value>
       </Property>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -1464,6 +1456,14 @@ where [refTable].[stor_id] = ? and [refTable].[storeName] = ? and [refTable].[ci
         <Name>TableInfoObjectType</Name>
         <Value
           type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Stores\Get Stores">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>

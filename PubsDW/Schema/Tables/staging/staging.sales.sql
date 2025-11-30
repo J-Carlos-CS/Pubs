@@ -1,6 +1,8 @@
 ﻿CREATE TABLE [staging].[sales]
 (
-	[SaleSK] [int] NOT NULL,
+    OrderId [varchar](20) NOT NULL,  
+    [authorId] [varchar](11) NOT NULL,
+	[SaleID] [int] NOT NULL,
 	[TitleSK] [int] NOT NULL,
 	[AuthorSK] [int] NULL,
 	[PublisherSK] [int] NOT NULL,

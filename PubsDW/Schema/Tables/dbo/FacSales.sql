@@ -1,7 +1,9 @@
 ﻿CREATE TABLE [dbo].[FactSales](
-	[SaleSK] [int] IDENTITY(1,1) NOT NULL,
+    OrderId [varchar](20) NOT NULL, 
+	[authorId] [varchar](11) NOT NULL,
+	[SaleID] [int] NOT NULL,
 	[TitleSK] [int] NOT NULL,
-	[AuthorSK] [int] NULL,
+	[AuthorSK] [int] NOT NULL,
 	[PublisherSK] [int] NOT NULL,
 	[StoreSK] [int] NOT NULL,
 	[DateKey] [int] NOT NULL,
@@ -9,9 +11,7 @@
 	[UnitPrice] [money] NULL,
 	[TotalAmount]  [money] NULL,
 PRIMARY KEY CLUSTERED 
-(
-	[SaleSK] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+([SaleID], [OrderId], [authorId])WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
 ALTER TABLE [dbo].[FactSales]  WITH CHECK ADD  CONSTRAINT [FK_FactSales_Authors] FOREIGN KEY([AuthorSK])

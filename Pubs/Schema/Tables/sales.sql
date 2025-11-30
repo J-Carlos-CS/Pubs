@@ -2,7 +2,7 @@
 	[stor_id] [char](4) NOT NULL,
 	[ord_num] [varchar](20) NOT NULL,
 	[ord_date] [datetime] NOT NULL,
-	[qty] [smallint] NOT NULL,
+	[qty] [int] NOT NULL,
 	[payterms] [varchar](12) NOT NULL,
 	[title_id] [varchar] (6) NOT NULL,
 	[RowVersion] [timestamp] NOT NULL,

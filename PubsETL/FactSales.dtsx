@@ -1,0 +1,2382 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/29/2025 10:55:31 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="CARLOS"
+  DTS:CreatorName="CARLOS\carlo"
+  DTS:DTSID="{4369393B-034E-47BE-AF89-5E12EA93EAF8}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="17.0.1008.3"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="FactSales"
+  DTS:PackageType="5"
+  DTS:VersionBuild="53"
+  DTS:VersionGUID="{C8C20FCB-4FA0-48F9-BD4D-1C94F1878A45}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Destination.PubsDW]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{D5E8C7B8-4269-4A66-8C59-8A27E708791E}"
+      DTS:ObjectName="Destination.PubsDW">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=PubsDW;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-FactSales-{D5E8C7B8-4269-4A66-8C59-8A27E708791E}(localdb)\MSSQLLocalDB.PubsDW;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Source.Pubs]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{7E4A78C8-EA85-4FEB-96C3-8332AC87CCE3}"
+      DTS:ObjectName="Source.Pubs">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Pubs;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{7E4A78C8-EA85-4FEB-96C3-8332AC87CCE3}(localdb)\MSSQLLocalDB.Pubs;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{F6CB3E9D-AA1A-45CF-9859-4E1521990D12}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="dbts">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{ACE660FD-23AC-4804-8C06-5BE3A3A871E6}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="lastRowVersion">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Clean-Up Staging"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{79A6E414-C3E9-45CC-A38B-9996713B0863}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Clean-Up Staging"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{D5E8C7B8-4269-4A66-8C59-8A27E708791E}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE staging.sales" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Get Database RowVersion"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{B3D898D0-5E5C-4D7A-BFD6-76A5723552B1}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get Database RowVersion"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{7E4A78C8-EA85-4FEB-96C3-8332AC87CCE3}"
+          SQLTask:SqlStatementSource="Execute [dbo].[GetDatabaseRowVersion]"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="DBTS"
+            SQLTask:DtsVariableName="User::dbts" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Get Last RowVersion"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{3DB8FED9-11EC-4159-BD2E-1BE127DC5CAB}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get Last RowVersion"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{D5E8C7B8-4269-4A66-8C59-8A27E708791E}"
+          SQLTask:SqlStatementSource="Execute [dbo].[GetLastPackageRowVersion] @tableName = 'Sales'"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="LastRowVersion"
+            SQLTask:DtsVariableName="User::lastRowVersion" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load Sales"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{C11908CA-ECA2-475D-924C-D23B47EFB9DD}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load Sales"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Load Sales\Get Sales"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Get Sales"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">EXECUTE [dbo].[GetSalesChangeByRowVersion] @startRow = ?, @endRow = ?</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping">"@startRow:Input",{ACE660FD-23AC-4804-8C06-5BE3A3A871E6};"@endRow:Input",{F6CB3E9D-AA1A-45CF-9859-4E1521990D12};</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Sales\Get Sales.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Source.Pubs]"
+                  connectionManagerRefId="Package.ConnectionManagers[Source.Pubs]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].Columns[stor_id]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].ExternalColumns[stor_id]"
+                      length="4"
+                      lineageId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].Columns[stor_id]"
+                      name="stor_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].Columns[qty]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].ExternalColumns[qty]"
+                      lineageId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].Columns[qty]"
+                      name="qty"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].Columns[payterms]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].ExternalColumns[payterms]"
+                      length="12"
+                      lineageId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].Columns[payterms]"
+                      name="payterms"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].Columns[title_id]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].ExternalColumns[title_id]"
+                      length="6"
+                      lineageId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].Columns[title_id]"
+                      name="title_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].Columns[au_id]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].ExternalColumns[au_id]"
+                      length="11"
+                      lineageId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].Columns[au_id]"
+                      name="au_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].Columns[total]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].ExternalColumns[total]"
+                      lineageId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].Columns[total]"
+                      name="total"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].Columns[dataKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].ExternalColumns[dataKey]"
+                      lineageId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].Columns[dataKey]"
+                      name="dataKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].Columns[ord_num]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].ExternalColumns[ord_num]"
+                      length="20"
+                      lineageId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].Columns[ord_num]"
+                      name="ord_num"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].Columns[pubId]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].ExternalColumns[pubId]"
+                      length="4"
+                      lineageId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].Columns[pubId]"
+                      name="pubId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].Columns[storeId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].ExternalColumns[storeId]"
+                      lineageId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].Columns[storeId]"
+                      name="storeId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].Columns[price]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].ExternalColumns[price]"
+                      lineageId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].Columns[price]"
+                      name="price"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].ExternalColumns[stor_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="stor_id" />
+                    <externalMetadataColumn
+                      refId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].ExternalColumns[qty]"
+                      dataType="i4"
+                      name="qty" />
+                    <externalMetadataColumn
+                      refId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].ExternalColumns[payterms]"
+                      codePage="1252"
+                      dataType="str"
+                      length="12"
+                      name="payterms" />
+                    <externalMetadataColumn
+                      refId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].ExternalColumns[title_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      name="title_id" />
+                    <externalMetadataColumn
+                      refId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].ExternalColumns[au_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="11"
+                      name="au_id" />
+                    <externalMetadataColumn
+                      refId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].ExternalColumns[total]"
+                      dataType="cy"
+                      name="total" />
+                    <externalMetadataColumn
+                      refId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].ExternalColumns[dataKey]"
+                      dataType="i4"
+                      name="dataKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].ExternalColumns[ord_num]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="ord_num" />
+                    <externalMetadataColumn
+                      refId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].ExternalColumns[pubId]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="pubId" />
+                    <externalMetadataColumn
+                      refId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].ExternalColumns[storeId]"
+                      dataType="i4"
+                      name="storeId" />
+                    <externalMetadataColumn
+                      refId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].ExternalColumns[price]"
+                      dataType="cy"
+                      name="price" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Error Output].Columns[stor_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      lineageId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Error Output].Columns[stor_id]"
+                      name="stor_id" />
+                    <outputColumn
+                      refId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Error Output].Columns[storeId]"
+                      dataType="i4"
+                      lineageId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Error Output].Columns[storeId]"
+                      name="storeId" />
+                    <outputColumn
+                      refId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Error Output].Columns[ord_num]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Error Output].Columns[ord_num]"
+                      name="ord_num" />
+                    <outputColumn
+                      refId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Error Output].Columns[au_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="11"
+                      lineageId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Error Output].Columns[au_id]"
+                      name="au_id" />
+                    <outputColumn
+                      refId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Error Output].Columns[qty]"
+                      dataType="i4"
+                      lineageId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Error Output].Columns[qty]"
+                      name="qty" />
+                    <outputColumn
+                      refId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Error Output].Columns[pubId]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      lineageId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Error Output].Columns[pubId]"
+                      name="pubId" />
+                    <outputColumn
+                      refId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Error Output].Columns[dataKey]"
+                      dataType="i4"
+                      lineageId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Error Output].Columns[dataKey]"
+                      name="dataKey" />
+                    <outputColumn
+                      refId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Error Output].Columns[payterms]"
+                      codePage="1252"
+                      dataType="str"
+                      length="12"
+                      lineageId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Error Output].Columns[payterms]"
+                      name="payterms" />
+                    <outputColumn
+                      refId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Error Output].Columns[title_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      lineageId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Error Output].Columns[title_id]"
+                      name="title_id" />
+                    <outputColumn
+                      refId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Error Output].Columns[price]"
+                      dataType="cy"
+                      lineageId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Error Output].Columns[price]"
+                      name="price" />
+                    <outputColumn
+                      refId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Error Output].Columns[total]"
+                      dataType="cy"
+                      lineageId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Error Output].Columns[total]"
+                      name="total" />
+                    <outputColumn
+                      refId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Sales\Lookup"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from [dbo].[FactSales]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (select * from [dbo].[FactSales]) [refTable]
+where [refTable].[authorId] = ? and [refTable].[OrderId] = ? and [refTable].[SaleID] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="OrderId" dataType="DT_STR" length="20" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="authorId" dataType="DT_STR" length="11" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="SaleID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="TitleSK" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="AuthorSK" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="PublisherSK" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="StoreSK" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="DateKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Quantity" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="UnitPrice" dataType="DT_CY" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="TotalAmount" dataType="DT_CY" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].Columns[au_id]};#{Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].Columns[ord_num]};#{Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].Columns[storeId]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Sales\Lookup.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Destination.PubsDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[Destination.PubsDW]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load Sales\Lookup.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Sales\Lookup.Inputs[Lookup Input].Columns[ord_num]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="ord_num"
+                      lineageId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].Columns[ord_num]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">OrderId</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load Sales\Lookup.Inputs[Lookup Input].Columns[storeId]"
+                      cachedDataType="i4"
+                      cachedName="storeId"
+                      lineageId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].Columns[storeId]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">SaleID</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load Sales\Lookup.Inputs[Lookup Input].Columns[au_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="11"
+                      cachedName="au_id"
+                      lineageId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].Columns[au_id]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">authorId</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Sales\Lookup.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Load Sales\Lookup.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Sales\Lookup.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Load Sales\Lookup.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Sales\Lookup.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Load Sales\Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Sales\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Sales\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Sales\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Sales\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Sales\Lookup Authors"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup Authors"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from [dbo].[DimAuthors]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (select * from [dbo].[DimAuthors]) [refTable]
+where [refTable].[au_id] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="AuthorSK" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="au_id" dataType="DT_STR" length="11" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="lastNname" dataType="DT_STR" length="40" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="FirstName" dataType="DT_STR" length="20" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="phone" dataType="DT_STR" length="12" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="city" dataType="DT_STR" length="20" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="state" dataType="DT_STR" length="2" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="zip" dataType="DT_STR" length="5" precision="0" scale="0" codePage="1252"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].Columns[au_id]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Sales\Lookup Authors.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Destination.PubsDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[Destination.PubsDW]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load Sales\Lookup Authors.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Sales\Lookup Authors.Inputs[Lookup Input].Columns[au_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="11"
+                      cachedName="au_id"
+                      lineageId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].Columns[au_id]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">au_id</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Sales\Lookup Authors.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Load Sales\Lookup Authors.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Sales\Lookup Authors.Outputs[Lookup Match Output].Columns[AuthorSK]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Load Sales\Lookup Authors.Outputs[Lookup Match Output].Columns[AuthorSK]"
+                      name="AuthorSK"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">AuthorSK</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Sales\Lookup Authors.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Load Sales\Lookup Authors.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Sales\Lookup Authors.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Load Sales\Lookup Authors.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Sales\Lookup Authors.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Sales\Lookup Authors.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Sales\Lookup Authors.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Sales\Lookup Authors.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Sales\Lookup Publishers"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup Publishers"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from [dbo].[DimPublishers]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (select * from [dbo].[DimPublishers]) [refTable]
+where [refTable].[pub_id] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="PublisherSK" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="pub_id" dataType="DT_STR" length="4" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="pubName" dataType="DT_STR" length="40" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="city" dataType="DT_STR" length="20" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="state" dataType="DT_STR" length="2" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="country" dataType="DT_STR" length="30" precision="0" scale="0" codePage="1252"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].Columns[pubId]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Sales\Lookup Publishers.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Destination.PubsDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[Destination.PubsDW]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load Sales\Lookup Publishers.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Sales\Lookup Publishers.Inputs[Lookup Input].Columns[pubId]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="pubId"
+                      lineageId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].Columns[pubId]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">pub_id</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Sales\Lookup Publishers.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Load Sales\Lookup Publishers.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Sales\Lookup Publishers.Outputs[Lookup Match Output].Columns[PublisherSK]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Load Sales\Lookup Publishers.Outputs[Lookup Match Output].Columns[PublisherSK]"
+                      name="PublisherSK"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">PublisherSK</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Sales\Lookup Publishers.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Load Sales\Lookup Publishers.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Sales\Lookup Publishers.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Load Sales\Lookup Publishers.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Sales\Lookup Publishers.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Sales\Lookup Publishers.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Sales\Lookup Publishers.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Sales\Lookup Publishers.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Sales\Lookup Stores"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup Stores"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from [dbo].[DimStores]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (select * from [dbo].[DimStores]) [refTable]
+where [refTable].[stor_id] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="StoreSK" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="stor_id" dataType="DT_STR" length="4" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="storeName" dataType="DT_STR" length="40" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="city" dataType="DT_STR" length="20" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="state" dataType="DT_STR" length="2" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="zip" dataType="DT_STR" length="5" precision="0" scale="0" codePage="1252"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].Columns[stor_id]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Sales\Lookup Stores.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Destination.PubsDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[Destination.PubsDW]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load Sales\Lookup Stores.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Sales\Lookup Stores.Inputs[Lookup Input].Columns[stor_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="stor_id"
+                      lineageId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].Columns[stor_id]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">stor_id</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Sales\Lookup Stores.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Load Sales\Lookup Stores.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Sales\Lookup Stores.Outputs[Lookup Match Output].Columns[StoreSK]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Load Sales\Lookup Stores.Outputs[Lookup Match Output].Columns[StoreSK]"
+                      name="StoreSK"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">StoreSK</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Sales\Lookup Stores.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Load Sales\Lookup Stores.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Sales\Lookup Stores.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Load Sales\Lookup Stores.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Sales\Lookup Stores.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Sales\Lookup Stores.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Sales\Lookup Stores.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Sales\Lookup Stores.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Sales\Lookup Titles"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup Titles"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from [dbo].[DimTitles]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (select * from [dbo].[DimTitles]) [refTable]
+where [refTable].[title_id] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="TitleSK" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="title_id" dataType="DT_STR" length="6" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="title" dataType="DT_STR" length="80" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="type" dataType="DT_STR" length="12" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="price" dataType="DT_CY" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="pubdate" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="pub_id" dataType="DT_STR" length="4" precision="0" scale="0" codePage="1252"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].Columns[title_id]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Sales\Lookup Titles.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Destination.PubsDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[Destination.PubsDW]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load Sales\Lookup Titles.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Sales\Lookup Titles.Inputs[Lookup Input].Columns[title_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="6"
+                      cachedName="title_id"
+                      lineageId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].Columns[title_id]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">title_id</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Sales\Lookup Titles.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Load Sales\Lookup Titles.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Sales\Lookup Titles.Outputs[Lookup Match Output].Columns[TitleSK]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Load Sales\Lookup Titles.Outputs[Lookup Match Output].Columns[TitleSK]"
+                      name="TitleSK"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">TitleSK</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Sales\Lookup Titles.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Load Sales\Lookup Titles.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Sales\Lookup Titles.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Load Sales\Lookup Titles.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Sales\Lookup Titles.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Sales\Lookup Titles.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Sales\Lookup Titles.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Sales\Lookup Titles.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Sales\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[staging].[sales]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Sales\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Destination.PubsDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[Destination.PubsDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load Sales\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Sales\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[TitleSK]"
+                      cachedDataType="i4"
+                      cachedName="TitleSK"
+                      externalMetadataColumnId="Package\Load Sales\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TitleSK]"
+                      lineageId="Package\Load Sales\Lookup Titles.Outputs[Lookup Match Output].Columns[TitleSK]" />
+                    <inputColumn
+                      refId="Package\Load Sales\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[StoreSK]"
+                      cachedDataType="i4"
+                      cachedName="StoreSK"
+                      externalMetadataColumnId="Package\Load Sales\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[StoreSK]"
+                      lineageId="Package\Load Sales\Lookup Stores.Outputs[Lookup Match Output].Columns[StoreSK]" />
+                    <inputColumn
+                      refId="Package\Load Sales\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PublisherSK]"
+                      cachedDataType="i4"
+                      cachedName="PublisherSK"
+                      externalMetadataColumnId="Package\Load Sales\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PublisherSK]"
+                      lineageId="Package\Load Sales\Lookup Publishers.Outputs[Lookup Match Output].Columns[PublisherSK]" />
+                    <inputColumn
+                      refId="Package\Load Sales\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[AuthorSK]"
+                      cachedDataType="i4"
+                      cachedName="AuthorSK"
+                      externalMetadataColumnId="Package\Load Sales\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AuthorSK]"
+                      lineageId="Package\Load Sales\Lookup Authors.Outputs[Lookup Match Output].Columns[AuthorSK]" />
+                    <inputColumn
+                      refId="Package\Load Sales\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[total]"
+                      cachedDataType="cy"
+                      cachedName="total"
+                      externalMetadataColumnId="Package\Load Sales\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TotalAmount]"
+                      lineageId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].Columns[total]" />
+                    <inputColumn
+                      refId="Package\Load Sales\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[price]"
+                      cachedDataType="cy"
+                      cachedName="price"
+                      externalMetadataColumnId="Package\Load Sales\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[UnitPrice]"
+                      lineageId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].Columns[price]" />
+                    <inputColumn
+                      refId="Package\Load Sales\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[qty]"
+                      cachedDataType="i4"
+                      cachedName="qty"
+                      externalMetadataColumnId="Package\Load Sales\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Quantity]"
+                      lineageId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].Columns[qty]" />
+                    <inputColumn
+                      refId="Package\Load Sales\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[dataKey]"
+                      cachedDataType="i4"
+                      cachedName="dataKey"
+                      externalMetadataColumnId="Package\Load Sales\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                      lineageId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].Columns[dataKey]" />
+                    <inputColumn
+                      refId="Package\Load Sales\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ord_num]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="ord_num"
+                      externalMetadataColumnId="Package\Load Sales\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OrderId]"
+                      lineageId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].Columns[ord_num]" />
+                    <inputColumn
+                      refId="Package\Load Sales\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[storeId]"
+                      cachedDataType="i4"
+                      cachedName="storeId"
+                      externalMetadataColumnId="Package\Load Sales\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SaleID]"
+                      lineageId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].Columns[storeId]" />
+                    <inputColumn
+                      refId="Package\Load Sales\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[au_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="11"
+                      cachedName="au_id"
+                      externalMetadataColumnId="Package\Load Sales\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[authorId]"
+                      lineageId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].Columns[au_id]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Sales\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OrderId]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="OrderId" />
+                    <externalMetadataColumn
+                      refId="Package\Load Sales\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TitleSK]"
+                      dataType="i4"
+                      name="TitleSK" />
+                    <externalMetadataColumn
+                      refId="Package\Load Sales\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AuthorSK]"
+                      dataType="i4"
+                      name="AuthorSK" />
+                    <externalMetadataColumn
+                      refId="Package\Load Sales\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PublisherSK]"
+                      dataType="i4"
+                      name="PublisherSK" />
+                    <externalMetadataColumn
+                      refId="Package\Load Sales\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[StoreSK]"
+                      dataType="i4"
+                      name="StoreSK" />
+                    <externalMetadataColumn
+                      refId="Package\Load Sales\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                      dataType="i4"
+                      name="DateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load Sales\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Quantity]"
+                      dataType="i4"
+                      name="Quantity" />
+                    <externalMetadataColumn
+                      refId="Package\Load Sales\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[UnitPrice]"
+                      dataType="cy"
+                      name="UnitPrice" />
+                    <externalMetadataColumn
+                      refId="Package\Load Sales\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TotalAmount]"
+                      dataType="cy"
+                      name="TotalAmount" />
+                    <externalMetadataColumn
+                      refId="Package\Load Sales\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SaleID]"
+                      dataType="i4"
+                      name="SaleID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Sales\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[authorId]"
+                      codePage="1252"
+                      dataType="str"
+                      length="11"
+                      name="authorId" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Sales\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load Sales\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Sales\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Sales\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Sales\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Sales\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Sales\OLE DB Destination 1"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination 1"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[FactSales]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Sales\OLE DB Destination 1.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Destination.PubsDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[Destination.PubsDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load Sales\OLE DB Destination 1.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Sales\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[TitleSK]"
+                      cachedDataType="i4"
+                      cachedName="TitleSK"
+                      externalMetadataColumnId="Package\Load Sales\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[TitleSK]"
+                      lineageId="Package\Load Sales\Lookup Titles.Outputs[Lookup Match Output].Columns[TitleSK]" />
+                    <inputColumn
+                      refId="Package\Load Sales\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[StoreSK]"
+                      cachedDataType="i4"
+                      cachedName="StoreSK"
+                      externalMetadataColumnId="Package\Load Sales\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[StoreSK]"
+                      lineageId="Package\Load Sales\Lookup Stores.Outputs[Lookup Match Output].Columns[StoreSK]" />
+                    <inputColumn
+                      refId="Package\Load Sales\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[PublisherSK]"
+                      cachedDataType="i4"
+                      cachedName="PublisherSK"
+                      externalMetadataColumnId="Package\Load Sales\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[PublisherSK]"
+                      lineageId="Package\Load Sales\Lookup Publishers.Outputs[Lookup Match Output].Columns[PublisherSK]" />
+                    <inputColumn
+                      refId="Package\Load Sales\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[AuthorSK]"
+                      cachedDataType="i4"
+                      cachedName="AuthorSK"
+                      externalMetadataColumnId="Package\Load Sales\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[AuthorSK]"
+                      lineageId="Package\Load Sales\Lookup Authors.Outputs[Lookup Match Output].Columns[AuthorSK]" />
+                    <inputColumn
+                      refId="Package\Load Sales\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[total]"
+                      cachedDataType="cy"
+                      cachedName="total"
+                      externalMetadataColumnId="Package\Load Sales\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[TotalAmount]"
+                      lineageId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].Columns[total]" />
+                    <inputColumn
+                      refId="Package\Load Sales\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[price]"
+                      cachedDataType="cy"
+                      cachedName="price"
+                      externalMetadataColumnId="Package\Load Sales\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[UnitPrice]"
+                      lineageId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].Columns[price]" />
+                    <inputColumn
+                      refId="Package\Load Sales\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[qty]"
+                      cachedDataType="i4"
+                      cachedName="qty"
+                      externalMetadataColumnId="Package\Load Sales\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[Quantity]"
+                      lineageId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].Columns[qty]" />
+                    <inputColumn
+                      refId="Package\Load Sales\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[dataKey]"
+                      cachedDataType="i4"
+                      cachedName="dataKey"
+                      externalMetadataColumnId="Package\Load Sales\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                      lineageId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].Columns[dataKey]" />
+                    <inputColumn
+                      refId="Package\Load Sales\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[ord_num]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="ord_num"
+                      externalMetadataColumnId="Package\Load Sales\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[OrderId]"
+                      lineageId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].Columns[ord_num]" />
+                    <inputColumn
+                      refId="Package\Load Sales\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[storeId]"
+                      cachedDataType="i4"
+                      cachedName="storeId"
+                      externalMetadataColumnId="Package\Load Sales\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[SaleID]"
+                      lineageId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].Columns[storeId]" />
+                    <inputColumn
+                      refId="Package\Load Sales\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[au_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="11"
+                      cachedName="au_id"
+                      externalMetadataColumnId="Package\Load Sales\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[authorId]"
+                      lineageId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output].Columns[au_id]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Sales\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[OrderId]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="OrderId" />
+                    <externalMetadataColumn
+                      refId="Package\Load Sales\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[TitleSK]"
+                      dataType="i4"
+                      name="TitleSK" />
+                    <externalMetadataColumn
+                      refId="Package\Load Sales\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[AuthorSK]"
+                      dataType="i4"
+                      name="AuthorSK" />
+                    <externalMetadataColumn
+                      refId="Package\Load Sales\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[PublisherSK]"
+                      dataType="i4"
+                      name="PublisherSK" />
+                    <externalMetadataColumn
+                      refId="Package\Load Sales\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[StoreSK]"
+                      dataType="i4"
+                      name="StoreSK" />
+                    <externalMetadataColumn
+                      refId="Package\Load Sales\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                      dataType="i4"
+                      name="DateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load Sales\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[Quantity]"
+                      dataType="i4"
+                      name="Quantity" />
+                    <externalMetadataColumn
+                      refId="Package\Load Sales\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[UnitPrice]"
+                      dataType="cy"
+                      name="UnitPrice" />
+                    <externalMetadataColumn
+                      refId="Package\Load Sales\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[TotalAmount]"
+                      dataType="cy"
+                      name="TotalAmount" />
+                    <externalMetadataColumn
+                      refId="Package\Load Sales\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[SaleID]"
+                      dataType="i4"
+                      name="SaleID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Sales\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[authorId]"
+                      codePage="1252"
+                      dataType="str"
+                      length="11"
+                      name="authorId" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Sales\OLE DB Destination 1.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load Sales\OLE DB Destination 1.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Sales\OLE DB Destination 1.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Sales\OLE DB Destination 1.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Sales\OLE DB Destination 1.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Sales\OLE DB Destination 1.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load Sales.Paths[Lookup Match Output]"
+              endId="Package\Load Sales\Lookup Stores.Inputs[Lookup Input]"
+              name="Lookup Match Output"
+              startId="Package\Load Sales\Lookup Titles.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Load Sales.Paths[Lookup Match Output1]"
+              endId="Package\Load Sales\Lookup Publishers.Inputs[Lookup Input]"
+              name="Lookup Match Output"
+              startId="Package\Load Sales\Lookup Stores.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Load Sales.Paths[Lookup Match Output2]"
+              endId="Package\Load Sales\Lookup Authors.Inputs[Lookup Input]"
+              name="Lookup Match Output"
+              startId="Package\Load Sales\Lookup Publishers.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Load Sales.Paths[Lookup Match Output3]"
+              endId="Package\Load Sales\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Lookup Match Output"
+              startId="Package\Load Sales\Lookup.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Load Sales.Paths[Lookup Match Output4]"
+              endId="Package\Load Sales\Lookup.Inputs[Lookup Input]"
+              name="Lookup Match Output"
+              startId="Package\Load Sales\Lookup Authors.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Load Sales.Paths[Lookup No Match Output]"
+              endId="Package\Load Sales\OLE DB Destination 1.Inputs[OLE DB Destination Input]"
+              name="Lookup No Match Output"
+              startId="Package\Load Sales\Lookup.Outputs[Lookup No Match Output]" />
+            <path
+              refId="Package\Load Sales.Paths[OLE DB Source Output]"
+              endId="Package\Load Sales\Lookup Titles.Inputs[Lookup Input]"
+              name="OLE DB Source Output"
+              startId="Package\Load Sales\Get Sales.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Sync Sales"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{A382DACA-C1DE-4507-A69A-627B2BFE3539}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Sync Sales"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{D5E8C7B8-4269-4A66-8C59-8A27E708791E}"
+          SQLTask:SqlStatementSource="EXECUTE [dbo].[DW_MergeFactSales] " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update PackageConfig"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{9F4CEEB8-642C-436D-9798-E8E7CD78D824}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update PackageConfig"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{D5E8C7B8-4269-4A66-8C59-8A27E708791E}"
+          SQLTask:SqlStatementSource="EXECUTE [dbo].[UpdateLastPackageRowVersion] @tableName = 'Sales', @lastRowVersion = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::dbts"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{E4A41146-F70A-4C30-AFA4-FC3C119EEAB6}"
+      DTS:From="Package\Get Database RowVersion"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Get Last RowVersion" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{C1E238E0-E682-4322-8C85-85B7F01E064D}"
+      DTS:From="Package\Get Last RowVersion"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Clean-Up Staging" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{4D1A049E-8586-4AC2-8660-A5DEF92B014D}"
+      DTS:From="Package\Clean-Up Staging"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Load Sales" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{F1EC73EF-C9FC-4B80-8870-876765250467}"
+      DTS:From="Package\Load Sales"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Sync Sales" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{A6775B2A-DFD0-4040-804A-B1538FDE01AD}"
+      DTS:From="Package\Sync Sales"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Update PackageConfig" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="201,42"
+          Id="Package\Get Database RowVersion"
+          TopLeft="684,201" />
+        <NodeLayout
+          Size="176,42"
+          Id="Package\Get Last RowVersion"
+          TopLeft="701,296" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="786.75,243">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,53"
+              Start="0,0"
+              End="0,45.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,45.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="160,42"
+          Id="Package\Clean-Up Staging"
+          TopLeft="708,384" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="788.5,338">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,46"
+              Start="0,0"
+              End="0,38.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,38.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="129,42"
+          Id="Package\Load Sales"
+          TopLeft="719,484" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="785.75,426">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,58"
+              Start="0,0"
+              End="0,50.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,50.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="129,42"
+          Id="Package\Sync Sales"
+          TopLeft="712,578" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="780,526">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,52"
+              Start="0,0"
+              End="0,44.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,44.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="185,42"
+          Id="Package\Update PackageConfig"
+          TopLeft="687,672" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="778,620">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,52"
+              Start="0,0"
+              End="0,44.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,44.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Load Sales">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="123,42"
+          Id="Package\Load Sales\Get Sales"
+          TopLeft="774,122" />
+        <NodeLayout
+          Size="141,42"
+          Id="Package\Load Sales\Lookup Titles"
+          TopLeft="765,212" />
+        <EdgeLayout
+          Id="Package\Load Sales.Paths[OLE DB Source Output]"
+          TopLeft="835.5,164">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,48"
+              Start="0,0"
+              End="0,40.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,40.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="146,42"
+          Id="Package\Load Sales\Lookup Stores"
+          TopLeft="768,310" />
+        <EdgeLayout
+          Id="Package\Load Sales.Paths[Lookup Match Output]"
+          TopLeft="838.25,254">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,56"
+              Start="0,0"
+              End="0,48.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,48.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,18.4453125,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="164,42"
+          Id="Package\Load Sales\Lookup Publishers"
+          TopLeft="765,411" />
+        <EdgeLayout
+          Id="Package\Load Sales.Paths[Lookup Match Output1]"
+          TopLeft="844,352">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59"
+              Start="0,0"
+              End="0,51.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,51.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,19.9453125,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="153,42"
+          Id="Package\Load Sales\Lookup Authors"
+          TopLeft="765,497" />
+        <EdgeLayout
+          Id="Package\Load Sales.Paths[Lookup Match Output2]"
+          TopLeft="844.25,453">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,44"
+              Start="0,0"
+              End="0,36.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,12.4453125,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="113,42"
+          Id="Package\Load Sales\Lookup"
+          TopLeft="794,571" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Load Sales\OLE DB Destination"
+          TopLeft="661,686" />
+        <EdgeLayout
+          Id="Package\Load Sales.Paths[Lookup Match Output3]"
+          TopLeft="833,613">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-86.5,73"
+              Start="0,0"
+              End="-86.5,65.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.8115183246073" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,25.8115183246073"
+                    Point2="0,29.8115183246073"
+                    Point3="-4,29.8115183246073" />
+                  <mssgle:LineSegment
+                    End="-82.5,29.8115183246073" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-82.5,29.8115183246073"
+                    Point2="-86.5,29.8115183246073"
+                    Point3="-86.5,33.8115183246073" />
+                  <mssgle:LineSegment
+                    End="-86.5,65.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-91.44138671875,34.8115183246073,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="180,42"
+          Id="Package\Load Sales\OLE DB Destination 1"
+          TopLeft="904,689" />
+        <EdgeLayout
+          Id="Package\Load Sales.Paths[Lookup No Match Output]"
+          TopLeft="868,613">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="126,76"
+              Start="0,0"
+              End="126,68.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27.0366492146597" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,27.0366492146597"
+                    Point2="0,31.0366492146597"
+                    Point3="4,31.0366492146597" />
+                  <mssgle:LineSegment
+                    End="122,31.0366492146597" />
+                  <mssgle:CubicBezierSegment
+                    Point1="122,31.0366492146597"
+                    Point2="126,31.0366492146597"
+                    Point3="126,35.0366492146597" />
+                  <mssgle:LineSegment
+                    End="126,68.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="7.19361328125,36.0366492146597,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Sales.Paths[Lookup Match Output4]"
+          TopLeft="841.5,539">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="9,32"
+              Start="0,0"
+              End="9,24.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,12" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,12"
+                    Point2="0,16"
+                    Point3="4,16" />
+                  <mssgle:LineSegment
+                    End="5,16" />
+                  <mssgle:CubicBezierSegment
+                    Point1="5,16"
+                    Point2="9,16"
+                    Point3="9,20" />
+                  <mssgle:LineSegment
+                    End="9,24.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-43.69138671875,21,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Sales\Get Sales">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Sales\Lookup Titles">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DimTitles]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Sales\Lookup Stores">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DimStores]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Sales\Lookup Publishers">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DimPublishers]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Sales\Lookup Authors">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DimAuthors]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Sales\Lookup">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[FactSales]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Sales\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Sales\OLE DB Destination 1">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

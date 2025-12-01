@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="DimTitles"
   DTS:PackageType="5"
-  DTS:VersionBuild="26"
-  DTS:VersionGUID="{5348DB28-A939-410B-A5DB-C108ACB2CC72}">
+  DTS:VersionBuild="27"
+  DTS:VersionGUID="{8D0F2D75-09CD-4184-8C28-E765710A0986}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -25,7 +25,7 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=PubsDW;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-DimStores-{2C900C86-B30A-48CD-8333-D4935B93B5D2}(localdb)\MSSQLLocalDB.PubsDW;Auto Translate=False;" />
+          DTS:ConnectionString="Data Source=DESKTOP-2M0I89H;Initial Catalog=PubsDW;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-DimStores-{2C900C86-B30A-48CD-8333-D4935B93B5D2}(localdb)\MSSQLLocalDB.PubsDW;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -37,7 +37,7 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Pubs;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-DimStores-{95B55C43-AB0E-4230-846C-DB9BC0344116}(localdb)\MSSQLLocalDB.Pubs;Auto Translate=False;" />
+          DTS:ConnectionString="Data Source=DESKTOP-2M0I89H;Initial Catalog=Pubs;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-DimStores-{95B55C43-AB0E-4230-846C-DB9BC0344116}(localdb)\MSSQLLocalDB.Pubs;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -159,7 +159,7 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">EXECUTE [dbo].[GetAllTitlesChangeByRowVersion] @startRow = ?, @endRow = ?</property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">EXECUTE [dbo].[GetAllTitlesChangeByRowVersion] @startRow = ?, @endRow = ?</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -478,7 +478,7 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -650,13 +650,13 @@
                   description="Specifies the SQL statement that generates the lookup table."
                   expressionType="Notify"
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from [dbo].[DimTitles]</property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[DimTitles]</property>
                 <property
                   dataType="System.String"
                   description="Specifies a SQL statement that uses parameters to generate the lookup table."
                   expressionType="Notify"
                   name="SqlCommandParam"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (select * from [dbo].[DimTitles]) [refTable]
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[DimTitles]) [refTable]
 where [refTable].[title_id] = ? and [refTable].[title] = ? and [refTable].[type] = ? and [refTable].[price] = ? and [refTable].[pubdate] = ? and [refTable].[pub_id] = ?</property>
                 <property
                   dataType="System.Int32"
@@ -906,7 +906,7 @@ where [refTable].[title_id] = ? and [refTable].[title] = ? and [refTable].[type]
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -1174,12 +1174,12 @@ where [refTable].[title_id] = ? and [refTable].[title] = ? and [refTable].[type]
       DTS:To="Package\Update PackageConfig" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
-<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
-<!--If you manually edit this section and make a mistake, you can delete it. -->
-<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<!--Esta sección CDATA contiene la información de diseño del paquete. Esta sección incluye información como, por ejemplo, las coordenadas (x,y), el ancho y el alto.-->
+<!--Si edita manualmente esta sección y comete un error, puede eliminarlo. -->
+<!--El paquete podrá cargarse normalmente, pero se perderá la información de diseño anterior y el diseñador reorganizará los elementos automáticamente en la superficie de diseño.-->
 <Objects
   Version="8">
-  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <!--Cada uno de los nodos siguientes contiene propiedades que no afectan al comportamiento en tiempo de ejecución.-->
   <Package
     design-time-name="Package">
     <LayoutInfo>
@@ -1453,27 +1453,6 @@ where [refTable].[title_id] = ? and [refTable].[title] = ? and [refTable].[type]
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Load Titles\Load New Titles">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Load Titles\Get Titles">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
     design-time-name="Package\Load Titles\OLE DB Destination">
     <Properties>
       <Property>
@@ -1492,7 +1471,7 @@ where [refTable].[title_id] = ? and [refTable].[title] = ? and [refTable].[type]
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
         <Value
-          type="q2:boolean">false</Value>
+          type="q2:string">false</Value>
       </Property>
       <Property>
         <Name>UsedTableName</Name>
@@ -1502,10 +1481,31 @@ where [refTable].[title_id] = ? and [refTable].[title] = ? and [refTable].[type]
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:int">0</Value>
+          type="q4:string">0</Value>
       </Property>
       <Property>
         <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Titles\Get Titles">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Titles\Load New Titles">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>

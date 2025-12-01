@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="DimPublishers"
   DTS:PackageType="5"
-  DTS:VersionBuild="22"
-  DTS:VersionGUID="{43922201-59E1-44F1-80CE-115B8CCA73D7}">
+  DTS:VersionBuild="25"
+  DTS:VersionGUID="{3AC375EE-9D86-4C06-BF7C-E489763409AD}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -25,7 +25,7 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=PubsDW;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{99AB6339-7DA9-4262-B772-7F43B2177FFB}(localdb)\MSSQLLocalDB.PubsDW;Auto Translate=False;" />
+          DTS:ConnectionString="Data Source=DESKTOP-2M0I89H;Initial Catalog=PubsDW;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Package1-{99AB6339-7DA9-4262-B772-7F43B2177FFB}(localdb)\MSSQLLocalDB.PubsDW;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -37,7 +37,7 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Pubs;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{F097B0F5-C12D-423F-961E-4490884EB757}(localdb)\MSSQLLocalDB.Pubs;Auto Translate=False;" />
+          DTS:ConnectionString="Data Source=DESKTOP-2M0I89H;Initial Catalog=Pubs;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Package1-{F097B0F5-C12D-423F-961E-4490884EB757}(localdb)\MSSQLLocalDB.Pubs;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -159,7 +159,7 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">EXECUTE [dbo].[GetPublisherChangeByRowVersion] @startRow = ?, @endRow = ?</property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">EXECUTE [dbo].[GetPublisherChangeByRowVersion] @startRow = ?, @endRow = ?</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -388,7 +388,7 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -554,13 +554,13 @@
                   description="Specifies the SQL statement that generates the lookup table."
                   expressionType="Notify"
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from [dbo].[DimPublishers]</property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[DimPublishers]</property>
                 <property
                   dataType="System.String"
                   description="Specifies a SQL statement that uses parameters to generate the lookup table."
                   expressionType="Notify"
                   name="SqlCommandParam"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (select * from [dbo].[DimPublishers]) [refTable]
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[DimPublishers]) [refTable]
 where [refTable].[pub_id] = ? and [refTable].[pubName] = ? and [refTable].[city] = ? and [refTable].[state] = ? and [refTable].[country] = ?</property>
                 <property
                   dataType="System.Int32"
@@ -796,7 +796,7 @@ where [refTable].[pub_id] = ? and [refTable].[pubName] = ? and [refTable].[city]
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -1058,17 +1058,21 @@ where [refTable].[pub_id] = ? and [refTable].[pubName] = ? and [refTable].[city]
       DTS:To="Package\Update PackageConfig" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
-<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
-<!--If you manually edit this section and make a mistake, you can delete it. -->
-<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<!--Esta sección CDATA contiene la información de diseño del paquete. Esta sección incluye información como, por ejemplo, las coordenadas (x,y), el ancho y el alto.-->
+<!--Si edita manualmente esta sección y comete un error, puede eliminarlo. -->
+<!--El paquete podrá cargarse normalmente, pero se perderá la información de diseño anterior y el diseñador reorganizará los elementos automáticamente en la superficie de diseño.-->
 <Objects
   Version="8">
-  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <!--Cada uno de los nodos siguientes contiene propiedades que no afectan al comportamiento en tiempo de ejecución.-->
   <Package
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="160,42"
+          Id="Package\Clean-Up Staging"
+          TopLeft="701,250" />
         <NodeLayout
           Size="163,42"
           Id="Package\Get Database RowVersion"
@@ -1077,6 +1081,18 @@ where [refTable].[pub_id] = ? and [refTable].[pubName] = ? and [refTable].[city]
           Size="176,42"
           Id="Package\Get Last RowVersion"
           TopLeft="686,168" />
+        <NodeLayout
+          Size="152,42"
+          Id="Package\Load Publishers"
+          TopLeft="723,339" />
+        <NodeLayout
+          Size="140,42"
+          Id="Package\Sync Staging"
+          TopLeft="726,427" />
+        <NodeLayout
+          Size="185,42"
+          Id="Package\Update PackageConfig"
+          TopLeft="718,512" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
           TopLeft="771.25,124">
@@ -1099,10 +1115,6 @@ where [refTable].[pub_id] = ? and [refTable].[pubName] = ? and [refTable].[city]
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="160,42"
-          Id="Package\Clean-Up Staging"
-          TopLeft="701,250" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
           TopLeft="777.5,210">
@@ -1125,10 +1137,6 @@ where [refTable].[pub_id] = ? and [refTable].[pubName] = ? and [refTable].[city]
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="152,42"
-          Id="Package\Load Publishers"
-          TopLeft="723,339" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
           TopLeft="781,292">
@@ -1163,10 +1171,6 @@ where [refTable].[pub_id] = ? and [refTable].[pubName] = ? and [refTable].[city]
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="140,42"
-          Id="Package\Sync Staging"
-          TopLeft="726,427" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
           TopLeft="797.5,381">
@@ -1189,10 +1193,6 @@ where [refTable].[pub_id] = ? and [refTable].[pubName] = ? and [refTable].[city]
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="185,42"
-          Id="Package\Update PackageConfig"
-          TopLeft="718,512" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 4]"
           TopLeft="796,469">
@@ -1236,13 +1236,21 @@ where [refTable].[pub_id] = ? and [refTable].[pubName] = ? and [refTable].[city]
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="146,42"
-          Id="Package\Load Publishers\Get Publishers"
-          TopLeft="713,122" />
+          Size="203,42"
+          Id="Package\Load Publishers\Update Existing Publishers"
+          TopLeft="574,330" />
         <NodeLayout
           Size="113,42"
           Id="Package\Load Publishers\Lookup"
           TopLeft="727,230" />
+        <NodeLayout
+          Size="146,42"
+          Id="Package\Load Publishers\Get Publishers"
+          TopLeft="713,122" />
+        <NodeLayout
+          Size="176,42"
+          Id="Package\Load Publishers\Load New Publishers"
+          TopLeft="900,340" />
         <EdgeLayout
           Id="Package\Load Publishers.Paths[OLE DB Source Output]"
           TopLeft="784.75,164">
@@ -1262,13 +1270,11 @@ where [refTable].[pub_id] = ? and [refTable].[pubName] = ? and [refTable].[city]
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="176,42"
-          Id="Package\Load Publishers\Load New Publishers"
-          TopLeft="900,340" />
         <EdgeLayout
           Id="Package\Load Publishers.Paths[Lookup No Match Output]"
           TopLeft="783.5,272">
@@ -1305,10 +1311,6 @@ where [refTable].[pub_id] = ? and [refTable].[pubName] = ? and [refTable].[city]
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="203,42"
-          Id="Package\Load Publishers\Update Existing Publishers"
-          TopLeft="574,330" />
         <EdgeLayout
           Id="Package\Load Publishers.Paths[Lookup Match Output]"
           TopLeft="766,272">
@@ -1349,38 +1351,7 @@ where [refTable].[pub_id] = ? and [refTable].[pubName] = ? and [refTable].[city]
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Load Publishers\Get Publishers">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Load Publishers\Lookup">
-    <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:boolean">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string">[dbo].[DimPublishers]</Value>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q4:int">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Load Publishers\Load New Publishers">
+    design-time-name="Package\Load Publishers\Update Existing Publishers">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -1393,7 +1364,38 @@ where [refTable].[pub_id] = ? and [refTable].[pubName] = ? and [refTable].[city]
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Load Publishers\Update Existing Publishers">
+    design-time-name="Package\Load Publishers\Lookup">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DimPublishers]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Publishers\Get Publishers">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Publishers\Load New Publishers">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>

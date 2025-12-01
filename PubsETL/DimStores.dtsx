@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="DimStores"
   DTS:PackageType="5"
-  DTS:VersionBuild="20"
-  DTS:VersionGUID="{77A9B466-6D9D-4C17-9A50-03299589365F}">
+  DTS:VersionBuild="21"
+  DTS:VersionGUID="{EF166B4D-5BC7-44D1-8169-44853AF9C514}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -25,7 +25,7 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=PubsDW;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-DimStores-{4C8EB541-27F0-488E-BDE7-92C7F9397D7B}(localdb)\MSSQLLocalDB.PubsDW;Auto Translate=False;" />
+          DTS:ConnectionString="Data Source=DESKTOP-2M0I89H;Initial Catalog=PubsDW;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-DimStores-{4C8EB541-27F0-488E-BDE7-92C7F9397D7B}(localdb)\MSSQLLocalDB.PubsDW;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -37,7 +37,7 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Pubs;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-DimStores-{8671CE53-D1C6-48F3-9D7A-84145C0F08D7}(localdb)\MSSQLLocalDB.Pubs;Auto Translate=False;" />
+          DTS:ConnectionString="Data Source=DESKTOP-2M0I89H;Initial Catalog=Pubs;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-DimStores-{8671CE53-D1C6-48F3-9D7A-84145C0F08D7}(localdb)\MSSQLLocalDB.Pubs;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -159,7 +159,7 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">EXECUTE [dbo].[GetStoresChangeByRowVersion] @startRow = ?, @endRow = ?</property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">EXECUTE [dbo].[GetStoresChangeByRowVersion] @startRow = ?, @endRow = ?</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -475,7 +475,7 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -641,13 +641,13 @@
                   description="Specifies the SQL statement that generates the lookup table."
                   expressionType="Notify"
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from [dbo].[DimStores]</property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[DimStores]</property>
                 <property
                   dataType="System.String"
                   description="Specifies a SQL statement that uses parameters to generate the lookup table."
                   expressionType="Notify"
                   name="SqlCommandParam"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (select * from [dbo].[DimStores]) [refTable]
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[DimStores]) [refTable]
 where [refTable].[stor_id] = ? and [refTable].[storeName] = ? and [refTable].[city] = ? and [refTable].[state] = ? and [refTable].[zip] = ?</property>
                 <property
                   dataType="System.Int32"
@@ -883,7 +883,7 @@ where [refTable].[stor_id] = ? and [refTable].[storeName] = ? and [refTable].[ci
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -1145,12 +1145,12 @@ where [refTable].[stor_id] = ? and [refTable].[storeName] = ? and [refTable].[ci
       DTS:To="Package\Update PackageConfig" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
-<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
-<!--If you manually edit this section and make a mistake, you can delete it. -->
-<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<!--Esta sección CDATA contiene la información de diseño del paquete. Esta sección incluye información como, por ejemplo, las coordenadas (x,y), el ancho y el alto.-->
+<!--Si edita manualmente esta sección y comete un error, puede eliminarlo. -->
+<!--El paquete podrá cargarse normalmente, pero se perderá la información de diseño anterior y el diseñador reorganizará los elementos automáticamente en la superficie de diseño.-->
 <Objects
   Version="8">
-  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <!--Cada uno de los nodos siguientes contiene propiedades que no afectan al comportamiento en tiempo de ejecución.-->
   <Package
     design-time-name="Package">
     <LayoutInfo>

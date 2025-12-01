@@ -1,0 +1,28 @@
+{
+  "name": "SemanticModel",
+  "compatibilityLevel": 1200,
+  "model": {
+    "culture": "en-US",
+    "dataSources": [
+      {
+        "name": "SqlServer localdbMSSQLLocalDB PubsDW",
+        "connectionString": "Provider=SQLNCLI11;Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=PubsDW;User ID=sa;Persist Security Info=false",
+        "impersonationMode": "impersonateAccount",
+        "account": "carlos\\carlo",
+        "annotations": [
+          {
+            "name": "ConnectionEditUISource",
+            "value": "SqlServer"
+          }
+        ]
+      }
+    ],
+    "annotations": [
+      {
+        "name": "ClientCompatibilityLevel",
+        "value": "400"
+      }
+    ]
+  },
+  "id": "SemanticModel"
+}

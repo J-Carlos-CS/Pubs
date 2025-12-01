@@ -3,11 +3,14 @@
     <BuildType Name="Debug" />
     <BuildType Name="Development" />
     <BuildType Name="Release" />
+    <Platform Name="Any CPU" />
+    <Platform Name="x86" />
   </Configurations>
   <Folder Name="/Databases/" />
   <Folder Name="/Databases/DataWarehouse/">
     <Project Path="PubsDW/PubsDW.sqlproj" Id="4a28105c-3076-46c5-b6a7-701c0af4254a">
       <BuildType Solution="Development|*" Project="Release" />
+      <Platform Project="AnyCPU" />
       <Build />
       <Deploy />
     </Project>
@@ -15,6 +18,7 @@
   <Folder Name="/Databases/OLTP/">
     <Project Path="Pubs/Pubs.sqlproj" Id="ab82f4c2-8086-4c87-9cfb-7efe10ad1a75">
       <BuildType Solution="Development|*" Project="Release" />
+      <Platform Project="AnyCPU" />
       <Build />
       <Deploy />
     </Project>
@@ -25,5 +29,11 @@
       <Platform Project="?" />
     </Project>
   </Folder>
-  <Folder Name="/OLAP/" />
+  <Folder Name="/OLAP/">
+    <Project Path="PubsOLAB/PubsOLAB.smproj" Type="6870e480-7721-4708-bfb8-9ae898aa21b3" Id="8ce414bb-95b2-4c99-9e03-51ba72086e22">
+      <BuildType Project="Development" />
+      <Platform Project="x86" />
+      <Deploy />
+    </Project>
+  </Folder>
 </Solution>

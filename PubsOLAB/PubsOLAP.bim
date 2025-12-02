@@ -515,6 +515,22 @@
           {
             "name": "TotalQuantity",
             "expression": " SUM(FactSales[Quantity])"
+          },
+          {
+            "name": "Editorialconmenosventas 1389",
+            "expression": " calculate(sum('FactSales'[Quantity]),'DimPublishers'[pub_id]=\"1389\")"
+          },
+          {
+            "name": "VentasdeLibromasVendido PS2091",
+            "expression": " calculate (sum('FactSales'[TotalAmount]), 'DimTitles'[title_id] =\"PS2091\")"
+          },
+          {
+            "name": "Store con más venta (Cantidad) 7066",
+            "expression": " calculate(sum('FactSales'[Quantity]),'DimStores'[stor_id]=\"7066\")"
+          },
+          {
+            "name": "TotalVentasPrecio",
+            "expression": " sum('FactSales'[TotalAmount])"
           }
         ],
         "annotations": [
